@@ -173,16 +173,27 @@ It publishes to PyPI when changes land on `main`:
 5. Run tests with `uv run pytest`.
 6. Run linting with `uv run ruff check .`.
 7. Build the package with `uv build`.
-8. Publish with PyPI Trusted Publishing.
+8. Publish with the `PYPI_API_TOKEN` GitHub Actions secret.
 
-One-time PyPI setup:
+One-time PyPI token setup:
 
 - Create or use the PyPI project named `office-stencil`.
-- Add a trusted publisher for the GitHub repo `binzhango/stencil`.
-- Set the workflow filename to `publish.yml`.
-- Leave the environment blank unless you later add a GitHub Actions environment.
+- Create a PyPI API token. Prefer a project-scoped token for `office-stencil` after the first release exists.
+- Add the token to GitHub as an Actions secret named `PYPI_API_TOKEN`.
+- The publish workflow uses `user: __token__` and `password: ${{ secrets.PYPI_API_TOKEN }}`.
 
 PyPI requires every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml`.
+
+## Dependabot
+
+The repo includes `.github/dependabot.yml`.
+
+Dependabot checks weekly for:
+
+- `uv` dependency updates from `pyproject.toml`
+- GitHub Actions updates from `.github/workflows/`
+
+Dependabot will open pull requests. Those PRs should go through the same CI and branch-protection rules as feature branches.
 
 ## Design Notes
 
