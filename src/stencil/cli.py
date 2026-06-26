@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Annotated
 
+import click
 import typer
 
 from .errors import StencilError
@@ -47,10 +48,10 @@ def render_command(
     try:
         rendered = render(template, payload, output_format=requested_format)
     except StencilError as exc:
-        raise typer.ClickException(str(exc)) from exc
+        raise click.ClickException(str(exc)) from exc
 
     try:
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_bytes(rendered)
     except OSError as exc:
-        raise typer.ClickException(f"Could not write output file: {exc}") from exc
+        raise click.ClickException(f"Could not write output file: {exc}") from exc

@@ -6,9 +6,10 @@ from typing import Any
 
 from .docx import render_docx
 from .errors import UnsupportedFormatError
+from .pdf import convert_docx_to_pdf
 
 SUPPORTED_TEMPLATE_SUFFIXES = {".docx"}
-SUPPORTED_OUTPUT_FORMATS = {"docx"}
+SUPPORTED_OUTPUT_FORMATS = {"docx", "pdf"}
 
 
 def render(
@@ -19,8 +20,8 @@ def render(
 ) -> bytes:
     """Render an Office template with mapping data.
 
-    Phase 1 intentionally supports DOCX input and DOCX output only. PDF,
-    XLSX, and PPTX are separate roadmap phases.
+    DOCX templates can be rendered to DOCX directly or converted to PDF.
+    XLSX and PPTX are separate roadmap phases.
     """
 
     path = Path(template_path)
@@ -35,10 +36,14 @@ def render(
     if requested_output not in SUPPORTED_OUTPUT_FORMATS:
         raise UnsupportedFormatError(
             "Unsupported output format "
-            f"{requested_output!r}; Phase 1 supports only 'docx' output"
+            f"{requested_output!r}; supported output formats: docx, pdf"
         )
 
     if suffix == ".docx":
-        return render_docx(path, data)
+        rendered_docx = render_docx(path, data)
+        if requested_output == "docx":
+            return rendered_docx
+        if requested_output == "pdf":
+            return convert_docx_to_pdf(rendered_docx)
 
     raise UnsupportedFormatError(f"No renderer registered for template format {suffix}")

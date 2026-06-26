@@ -2,6 +2,13 @@
 
 All notable changes to Stencil are documented here.
 
+## Unreleased
+
+### Added
+
+- Added DOCX-to-PDF output through LibreOffice with timeout handling, one retry, isolated temp workspaces, and cleanup.
+- Added PDF conversion tests for retry, timeout, cleanup, and concurrent render dispatch.
+
 ## 0.1.1 - 2026-06-26
 
 ### Fixed
