@@ -173,7 +173,10 @@ It publishes to PyPI when changes land on `main`:
 5. Run tests with `uv run pytest`.
 6. Run linting with `uv run ruff check .`.
 7. Build the package with `uv build`.
-8. Publish with the `PYPI_API_TOKEN` GitHub Actions secret.
+8. Read the matching release notes from `CHANGELOG.md`.
+9. Create a GitHub Release tagged from the package version, such as `v0.1.0`.
+10. Attach the built wheel and source distribution to the release.
+11. Publish with the `PYPI_API_TOKEN` GitHub Actions secret.
 
 One-time PyPI token setup:
 
@@ -182,7 +185,7 @@ One-time PyPI token setup:
 - Add the token to GitHub as an Actions secret named `PYPI_API_TOKEN`.
 - The publish workflow uses `user: __token__` and `password: ${{ secrets.PYPI_API_TOKEN }}`.
 
-PyPI requires every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml`.
+PyPI and GitHub releases both require every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml` and add a matching section to `CHANGELOG.md`. The workflow creates the GitHub tag from that version and uses the matching changelog section as the release notes.
 
 ## Dependabot
 
