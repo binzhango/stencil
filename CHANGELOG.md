@@ -2,7 +2,7 @@
 
 All notable changes to Stencil are documented here.
 
-## Unreleased
+## 0.2.0 - 2026-06-26
 
 ### Added
 
