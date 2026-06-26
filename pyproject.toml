@@ -1,6 +1,6 @@
 [project]
 name = "office-stencil"
-version = "0.1.0"
+version = "0.1.1"
 description = "A reusable Office document template render engine for DOCX, XLSX, and PPTX."
 readme = "README.md"
 requires-python = ">=3.12"

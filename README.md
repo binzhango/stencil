@@ -185,7 +185,7 @@ One-time PyPI token setup:
 - Add the token to GitHub as an Actions secret named `PYPI_API_TOKEN`.
 - The publish workflow uses `user: __token__` and `password: ${{ secrets.PYPI_API_TOKEN }}`.
 
-PyPI and GitHub releases both require every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml` and add a matching section to `CHANGELOG.md`. The workflow creates the GitHub tag from that version and uses the matching changelog section as the release notes.
+PyPI and GitHub releases both require every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml` and add a matching section to `CHANGELOG.md`. The runtime `stencil.__version__` is read from installed package metadata, so there is no second version constant to keep in sync. The workflow creates the GitHub tag from that version and uses the matching changelog section as the release notes.
 
 ## Dependabot
 
