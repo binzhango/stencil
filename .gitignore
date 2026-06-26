@@ -43,6 +43,7 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+.cache/
 nosetests.xml
 coverage.xml
 *.cover
@@ -219,3 +220,6 @@ __marimo__/
 
 # Local development docs and planning notes
 docs/
+
+# Rendered example outputs
+examples/out/

@@ -1,0 +1,29 @@
+{
+  "project": {
+    "name": "Stencil DOCX MVP"
+  },
+  "owner": {
+    "name": "Bin Zhang"
+  },
+  "status": "On track",
+  "report_date": "2026-06-26",
+  "summary": "The template defines the layout and styles. Stencil only replaces the dynamic values.",
+  "milestones": [
+    {
+      "name": "Create styled template",
+      "owner": "Design",
+      "due": "2026-06-27"
+    },
+    {
+      "name": "Render with JSON data",
+      "owner": "Engineering",
+      "due": "2026-06-28"
+    },
+    {
+      "name": "Review output formatting",
+      "owner": "Operations",
+      "due": "2026-06-29"
+    }
+  ],
+  "risk_note": "Do not put style instructions in JSON; keep styling in the DOCX template."
+}

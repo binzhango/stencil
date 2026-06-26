@@ -1,0 +1,24 @@
+{
+  "invoice": {
+    "number": "INV-1001",
+    "date": "2026-06-26",
+    "note": "Thanks for building with Stencil."
+  },
+  "customer": {
+    "name": "Acme Studio",
+    "email": "hello@example.com"
+  },
+  "line_items": [
+    {
+      "description": "Template implementation",
+      "quantity": 1,
+      "amount": "$1,200.00"
+    },
+    {
+      "description": "DOCX rendering QA",
+      "quantity": 2,
+      "amount": "$300.00"
+    }
+  ],
+  "total": "$1,800.00"
+}

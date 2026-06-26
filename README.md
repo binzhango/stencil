@@ -73,6 +73,21 @@ The CLI reads a top-level JSON object from the data file and writes the rendered
 
 PDF output is planned for a later phase.
 
+## Example
+
+See [examples/](examples/) for a runnable DOCX example with:
+
+- `examples/templates/invoice.docx`
+- `examples/data/invoice.json`
+- `examples/templates/styled-status-report.docx`
+- `examples/data/status-report.json`
+
+```bash
+uv sync --dev
+uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.docx
+uv run stencil render examples/templates/styled-status-report.docx examples/data/status-report.json --output examples/out/styled-status-report.docx
+```
+
 ## Roadmap
 
 1. Foundation and proof of shape
