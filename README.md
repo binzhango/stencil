@@ -160,6 +160,30 @@ Run type checking:
 uv run mypy
 ```
 
+## Publishing
+
+The repo includes a GitHub Actions workflow at `.github/workflows/publish.yml`.
+
+It publishes to PyPI when changes land on `main`:
+
+1. Check out the repo.
+2. Install `uv`.
+3. Set up Python 3.12.
+4. Install dependencies with `uv sync --dev`.
+5. Run tests with `uv run pytest`.
+6. Run linting with `uv run ruff check .`.
+7. Build the package with `uv build`.
+8. Publish with PyPI Trusted Publishing.
+
+One-time PyPI setup:
+
+- Create or use the PyPI project named `office-stencil`.
+- Add a trusted publisher for the GitHub repo `binzhango/stencil`.
+- Set the workflow filename to `publish.yml`.
+- Leave the environment blank unless you later add a GitHub Actions environment.
+
+PyPI requires every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml`.
+
 ## Design Notes
 
 Office files are zipped XML packages, but each format has different failure modes.

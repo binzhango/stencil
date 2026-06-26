@@ -58,8 +58,11 @@ dev = [
 stencil = "stencil.cli:app"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "editables"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stencil"]
 
 [tool.uv]
 package = true
