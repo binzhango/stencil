@@ -12,7 +12,7 @@ The project starts with DOCX because it is the fastest path to a useful internal
 
 ## Status
 
-Pre-alpha DOCX MVP.
+Pre-alpha DOCX and PDF MVP.
 
 What exists now:
 
@@ -21,12 +21,12 @@ What exists now:
 - `stencil` import package
 - `render()` API for DOCX templates
 - `stencil render` CLI command for JSON data
+- PDF output through LibreOffice conversion
 - DOCX-first roadmap in local ignored docs
 
 What does not exist yet:
 
 - Stable public API
-- PDF conversion worker
 - XLSX rendering
 - PPTX rendering
 
@@ -61,17 +61,18 @@ document = render(
 )
 ```
 
-Phase 1 supports DOCX input and DOCX output only. The exact API may change while the project is pre-alpha.
+DOCX templates can currently render to `docx` or `pdf`. The exact API may change while the project is pre-alpha.
 
 ## CLI
 
 ```bash
 stencil render invoice.docx data.json --output invoice.docx
+stencil render invoice.docx data.json --output invoice.pdf
 ```
 
 The CLI reads a top-level JSON object from the data file and writes the rendered document bytes to the output path.
 
-PDF output is planned for a later phase.
+PDF output requires LibreOffice to be installed and available as `soffice` or `libreoffice`.
 
 ## Example
 
@@ -85,6 +86,7 @@ See [examples/](examples/) for a runnable DOCX example with:
 ```bash
 uv sync --dev
 uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.docx
+uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.pdf
 uv run stencil render examples/templates/styled-status-report.docx examples/data/status-report.json --output examples/out/styled-status-report.docx
 ```
 
@@ -128,9 +130,9 @@ Development dependencies:
 - `ruff`: linting and import sorting
 - `mypy`: static type checking
 
-External system dependency:
+External system dependency for PDF output:
 
-- LibreOffice / `soffice`: planned conversion engine for PDF output
+- LibreOffice / `soffice`: converts rendered Office documents to PDF
 
 ## Local Development
 

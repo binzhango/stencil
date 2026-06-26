@@ -1,13 +1,14 @@
 # Stencil DOCX Example
 
-This folder contains a small DOCX template and JSON payload that show the Phase 1 Stencil workflow.
+This folder contains DOCX templates and JSON payloads that show the Stencil workflow.
 
 ## Files
 
 - `templates/invoice.docx`: a DOCX template with Jinja-style placeholders
 - `data/invoice.json`: sample data used to fill the template
-- `templates/styled-status-report.docx`: a styled DOCX template showing style preservation
+- `templates/styled-status-report.docx`: a styled DOCX template with a page header, sections, tables, and a risk callout
 - `data/status-report.json`: sample data for the styled report
+- `scripts/render_styled_status_pdf.py`: minimal Python example that renders the styled report to PDF
 - `scripts/create_styled_status_template.py`: helper script that generated the styled template
 
 The template includes:
@@ -34,13 +35,27 @@ uv run stencil render examples/templates/invoice.docx examples/data/invoice.json
 
 Open `examples/out/invoice.docx` in Word, LibreOffice, or another DOCX viewer.
 
+Render the invoice to PDF:
+
+```bash
+uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.pdf
+```
+
+PDF output requires LibreOffice to be installed and available as `soffice` or `libreoffice`.
+
+Render the styled report to PDF:
+
+```bash
+uv run python examples/scripts/render_styled_status_pdf.py
+```
+
 Render the styled example:
 
 ```bash
 uv run stencil render examples/templates/styled-status-report.docx examples/data/status-report.json --output examples/out/styled-status-report.docx
 ```
 
-Open `examples/out/styled-status-report.docx` and compare it with `examples/templates/styled-status-report.docx`. The title, subtitle, table colors, status color, and risk-note styling come from the template.
+Open `examples/out/styled-status-report.docx` and compare it with `examples/templates/styled-status-report.docx`. The page header, title, section headings, table colors, status color, footer, and risk-note styling come from the template.
 
 ## Run With Python
 
@@ -53,15 +68,15 @@ from stencil import render
 data = json.loads(Path("examples/data/invoice.json").read_text())
 
 document = render(
-    "examples/templates/invoice.docx",
+    "examples/templates/styled-status-report.docx",
     data,
-    output_format="docx",
+    output_format="pdf",
 )
 
-Path("examples/out/invoice.docx").parent.mkdir(parents=True, exist_ok=True)
-Path("examples/out/invoice.docx").write_bytes(document)
+Path("examples/out/styled-status-report.pdf").parent.mkdir(parents=True, exist_ok=True)
+Path("examples/out/styled-status-report.pdf").write_bytes(document)
 ```
 
 ## Current Limitation
 
-Phase 1 supports DOCX input and DOCX output only. PDF, XLSX, and PPTX are later roadmap phases.
+Stencil currently supports DOCX input with DOCX or PDF output. XLSX and PPTX are later roadmap phases.
