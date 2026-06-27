@@ -1,0 +1,24 @@
+{
+  "project": {
+    "name": "Stencil PPTX Engine",
+    "owner": "Platform Tools",
+    "status": "Ready for internal review"
+  },
+  "milestones": [
+    {
+      "name": "Text placeholders",
+      "status": "Complete",
+      "summary": "Slide text is rendered with Jinja data."
+    },
+    {
+      "name": "Repeated slides",
+      "status": "Complete",
+      "summary": "Marker slides expand one detail slide per milestone."
+    },
+    {
+      "name": "PDF export",
+      "status": "Available",
+      "summary": "LibreOffice conversion uses the same PDF worker as DOCX and XLSX."
+    }
+  ]
+}

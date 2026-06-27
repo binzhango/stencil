@@ -8,7 +8,7 @@ It is designed for workflows where a `.docx`, `.xlsx`, or `.pptx` template conta
 stencil render invoice.docx data.json --output invoice.pdf
 ```
 
-The project started with DOCX because it was the fastest path to a useful internal tool. XLSX now uses a separate spreadsheet engine behind the same public API, and PPTX remains a later roadmap phase.
+The project started with DOCX because it was the fastest path to a useful internal tool. XLSX and PPTX now use separate Office XML engines behind the same public API.
 
 ## Status
 
@@ -19,10 +19,11 @@ What exists now:
 - `uv`-compatible Python package metadata
 - Python `>=3.12`
 - `stencil` import package
-- `render()` API for DOCX and XLSX templates
+- `render()` API for DOCX, PPTX, and XLSX templates
+- PPTX text substitutions and repeated-slide loops
 - `stencil render` CLI command for JSON data
-- PDF output through LibreOffice conversion for DOCX and XLSX templates
-- template authoring guidance for supported DOCX features
+- PDF output through LibreOffice conversion for DOCX, PPTX, and XLSX templates
+- template authoring guidance for supported DOCX, PPTX, and XLSX features
 - XLSX cell substitutions and row loops
 - versioned sample templates covered by expected-output tests
 - DOCX-first roadmap in local ignored docs
@@ -30,7 +31,6 @@ What exists now:
 What does not exist yet:
 
 - Stable public API
-- PPTX rendering
 
 ## Naming
 
@@ -63,13 +63,15 @@ document = render(
 )
 ```
 
-DOCX templates can currently render to `docx` or `pdf`. XLSX templates can render to `xlsx` or `pdf`. The local Python API is the stable package boundary for the internal tool while the project remains pre-alpha.
+DOCX templates can currently render to `docx` or `pdf`. PPTX templates can render to `pptx` or `pdf`. XLSX templates can render to `xlsx` or `pdf`. The local Python API is the stable package boundary for the internal tool while the project remains pre-alpha.
 
 ## CLI
 
 ```bash
 stencil render invoice.docx data.json --output invoice.docx
 stencil render invoice.docx data.json --output invoice.pdf
+stencil render deck.pptx data.json --output deck.pptx
+stencil render deck.pptx data.json --output deck.pdf
 stencil render workbook.xlsx data.json --output workbook.xlsx
 stencil render workbook.xlsx data.json --output workbook.pdf
 ```
@@ -98,21 +100,28 @@ Supported XLSX features:
 - style, number-format, row-height, and multiple-sheet preservation for rendered cells
 - relative formula translation inside cloned loop rows
 
+Supported PPTX features:
+
+- variable replacement in slide text, such as `{{ customer.name }}`
+- conditionals inside a text paragraph, such as `{% if project.on_track %}...{% endif %}`
+- repeated slides with marker slides containing `{% for item in items %}` and `{% endfor %}`
+- cloned-slide relationship, presentation-order, and content-type entries for repeated slides
+
 Authoring rules:
 
 - Keep one complete Jinja tag in one editable text run when possible. If Word splits a tag across runs, retype the whole tag in one pass.
 - Keep styles, table borders, headers, footers, and layout in the DOCX template, not in JSON data.
 - For XLSX row loops, put the loop start and end tags in their own cells on their own rows.
+- For PPTX repeated-slide loops, put the loop start and end tags on their own marker slides.
 - Use a top-level JSON object for CLI data.
 - Use UTF-8 JSON and pass plain values, lists, and objects.
 - Keep templates trusted. Stencil does not sandbox untrusted Office templates.
 
 Known limitations:
 
-- Only DOCX and XLSX input are supported.
-- DOCX output formats are `docx` and `pdf`; XLSX output formats are `xlsx` and `pdf`.
+- DOCX output formats are `docx` and `pdf`; PPTX output formats are `pptx` and `pdf`; XLSX output formats are `xlsx` and `pdf`.
 - PDF output requires LibreOffice.
-- XLSX chart rewriting, complex formula-range adjustment, PPTX, hosted APIs, Redis, Celery, and sandboxing are intentionally outside the current package boundary.
+- PPTX chart/data rewriting, speaker-note rewriting, XLSX chart rewriting, complex formula-range adjustment, hosted APIs, Redis, Celery, and sandboxing are intentionally outside the current package boundary.
 - Inline image replacement is not part of the packaged internal-tool API yet.
 
 Troubleshooting:
@@ -121,6 +130,7 @@ Troubleshooting:
 - `Unsupported template format`: use a `.docx` or `.xlsx` template.
 - `Unsupported output format`: use `docx`, `xlsx`, or `pdf`, or choose an output path with one of those suffixes.
 - `Failed to render DOCX template`: check Jinja syntax and confirm every referenced field exists in the JSON object.
+- `Failed to render PPTX template`: check Jinja syntax, repeated-slide marker slides, and confirm every referenced field exists in the JSON object.
 - `Failed to render XLSX template`: check Jinja syntax, loop rows, and confirm every referenced field exists in the JSON object.
 - `PDF conversion requires LibreOffice`: install LibreOffice and confirm `soffice` or `libreoffice` is on `PATH`.
 - `LibreOffice PDF conversion timed out`: open the rendered document manually and simplify or repair the template.
@@ -133,6 +143,8 @@ See [examples/](examples/) for a runnable DOCX example with:
 - `examples/data/invoice.json`
 - `examples/templates/styled-status-report.docx`
 - `examples/data/status-report.json`
+- `examples/templates/pptx-status.pptx`
+- `examples/data/pptx-status.json`
 
 These examples are versioned with the package and covered by tests that check the rendered user-visible text.
 
@@ -141,6 +153,7 @@ uv sync --dev
 uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.docx
 uv run stencil render examples/templates/invoice.docx examples/data/invoice.json --output examples/out/invoice.pdf
 uv run stencil render examples/templates/styled-status-report.docx examples/data/status-report.json --output examples/out/styled-status-report.docx
+uv run stencil render examples/templates/pptx-status.pptx examples/data/pptx-status.json --output examples/out/pptx-status.pptx
 ```
 
 ## Roadmap
@@ -262,7 +275,7 @@ Office files are zipped XML packages, but each format has different failure mode
 - PPTX repeated slides require cloning slide XML, relationships, presentation ordering, and content type entries.
 - PDF conversion through LibreOffice needs timeouts, retries, cleanup, and worker isolation.
 
-Stencil should stay milestone-driven: keep the reliable DOCX and XLSX engines focused, then use real needs to decide when PPTX and service infrastructure are worth the extra complexity.
+Stencil should stay milestone-driven: keep the reliable Office engines focused, then use real needs to decide when service infrastructure is worth the extra complexity.
 
 ## License
 

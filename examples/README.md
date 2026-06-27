@@ -1,6 +1,6 @@
 # Stencil Examples
 
-This folder contains DOCX templates and JSON payloads that show the Stencil workflow.
+This folder contains Office templates and JSON payloads that show the Stencil workflow.
 
 The examples are versioned package fixtures. When a template or payload changes, update the expected-output tests in `tests/test_render.py` in the same change.
 
@@ -10,6 +10,9 @@ The examples are versioned package fixtures. When a template or payload changes,
 - `data/invoice.json`: sample data used to fill the template
 - `templates/styled-status-report.docx`: a styled DOCX template with a page header, sections, tables, and a risk callout
 - `data/status-report.json`: sample data for the styled report
+- `templates/pptx-status.pptx`: a PPTX template with text placeholders and repeated milestone slides
+- `data/pptx-status.json`: sample data for the PPTX status deck
+- `scripts/create_pptx_status_template.py`: helper script that generated the PPTX template
 - `scripts/render_styled_status_pdf.py`: minimal Python example that renders the styled report to PDF
 - `scripts/create_styled_status_template.py`: helper script that generated the styled template
 
@@ -21,11 +24,14 @@ The template includes:
 
 The styled status report example shows the recommended workflow for complex formatting: design the Word document visually first, then replace only the dynamic text with placeholders. The rendered values inherit the styles from the template.
 
+The PPTX status deck shows repeated-slide loops: one marker slide contains `{% for milestone in milestones %}`, the next slide is cloned once per item, and a final marker slide contains `{% endfor %}`.
+
 ## Authoring Rules
 
 - Keep dynamic data in JSON and visual design in the DOCX template.
 - Use complete Jinja tags such as `{{ project.name }}` and `{% if risk_note %}`.
 - Retype a whole tag if Word splits or styles only part of it.
+- For repeated PPTX slides, keep the loop start and end tags on their own marker slides.
 - Test templates with the CLI before using them in another application.
 - Keep templates trusted; Stencil does not sandbox untrusted documents.
 
@@ -67,6 +73,14 @@ uv run stencil render examples/templates/styled-status-report.docx examples/data
 
 Open `examples/out/styled-status-report.docx` and compare it with `examples/templates/styled-status-report.docx`. The page header, title, section headings, table colors, status color, footer, and risk-note styling come from the template.
 
+Render the PPTX status deck:
+
+```bash
+uv run stencil render examples/templates/pptx-status.pptx examples/data/pptx-status.json --output examples/out/pptx-status.pptx
+```
+
+Open `examples/out/pptx-status.pptx` and confirm the milestone detail slide was repeated once for each milestone in the JSON data.
+
 ## Run With Python
 
 ```python
@@ -89,4 +103,4 @@ Path("examples/out/styled-status-report.pdf").write_bytes(document)
 
 ## Current Limitation
 
-Stencil currently supports DOCX input with DOCX or PDF output, and XLSX input with XLSX or PDF output. PPTX is a later roadmap phase.
+Stencil currently supports DOCX input with DOCX or PDF output, PPTX input with PPTX or PDF output, and XLSX input with XLSX or PDF output.
