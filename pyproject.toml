@@ -1,6 +1,6 @@
 [project]
 name = "office-stencil"
-version = "0.4.0"
+version = "0.5.0"
 description = "A reusable Office document template render engine for DOCX, XLSX, and PPTX."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -49,6 +49,7 @@ workers = [
 
 [dependency-groups]
 dev = [
+    "httpx2>=2.5.0",
     "mypy>=1.10.0",
     "pytest>=8.0.0",
     "pytest-cov>=5.0.0",
@@ -86,5 +87,11 @@ strict = true
 packages = ["stencil"]
 
 [[tool.mypy.overrides]]
-module = ["docxtpl", "openpyxl", "openpyxl.formula.translate"]
+module = [
+    "docxtpl",
+    "fastapi",
+    "fastapi.responses",
+    "openpyxl",
+    "openpyxl.formula.translate",
+]
 ignore_missing_imports = true
