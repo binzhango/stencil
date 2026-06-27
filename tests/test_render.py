@@ -1,5 +1,6 @@
 import importlib
 import json
+import re
 import zipfile
 from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
@@ -7,6 +8,7 @@ from io import BytesIO
 from pathlib import Path
 from subprocess import CompletedProcess, TimeoutExpired
 from xml.etree import ElementTree
+from xml.sax.saxutils import escape
 
 import pytest
 
@@ -16,6 +18,10 @@ from stencil.pdf import LibreOfficePdfConverter, PdfConversionError
 
 render_module = importlib.import_module("stencil.render")
 WORD_TEXT = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t"
+PPTX_TEXT = "{http://schemas.openxmlformats.org/drawingml/2006/main}t"
+PRESENTATION_SLIDE_ID = "{http://schemas.openxmlformats.org/presentationml/2006/main}sldId"
+RELATIONSHIP = "{http://schemas.openxmlformats.org/package/2006/relationships}Relationship"
+REL_ID = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"
 
 
 def _rendered_docx_text(document: bytes) -> str:
@@ -39,9 +45,111 @@ def _load_rendered_workbook(document: bytes):
     return load_workbook(BytesIO(document), data_only=False)
 
 
+def _write_minimal_pptx(path: Path, slide_texts: list[str]) -> None:
+    content_type_overrides = "\n".join(
+        (
+            f'<Override PartName="/ppt/slides/slide{index}.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>'
+        )
+        for index in range(1, len(slide_texts) + 1)
+    )
+    presentation_slide_ids = "\n".join(
+        f'<p:sldId id="{255 + index}" r:id="rId{index}"/>'
+        for index in range(1, len(slide_texts) + 1)
+    )
+    presentation_relationships = "\n".join(
+        (
+            f'<Relationship Id="rId{index}" '
+            'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" '
+            f'Target="slides/slide{index}.xml"/>'
+        )
+        for index in range(1, len(slide_texts) + 1)
+    )
+
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr(
+            "[Content_Types].xml",
+            (
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+                '<Default Extension="rels" '
+                'ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+                '<Default Extension="xml" ContentType="application/xml"/>'
+                '<Override PartName="/ppt/presentation.xml" '
+                'ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>'
+                f"{content_type_overrides}"
+                "</Types>"
+            ),
+        )
+        archive.writestr(
+            "_rels/.rels",
+            (
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                '<Relationship Id="rId1" '
+                'Type="http://schemas.openxmlformats.org/officeDocument/2006/'
+                'relationships/officeDocument" '
+                'Target="ppt/presentation.xml"/>'
+                "</Relationships>"
+            ),
+        )
+        archive.writestr(
+            "ppt/presentation.xml",
+            (
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<p:presentation xmlns:p="http://schemas.openxmlformats.org/'
+                'presentationml/2006/main" '
+                'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+                f"<p:sldIdLst>{presentation_slide_ids}</p:sldIdLst>"
+                "</p:presentation>"
+            ),
+        )
+        archive.writestr(
+            "ppt/_rels/presentation.xml.rels",
+            (
+                '<?xml version="1.0" encoding="UTF-8"?>'
+                '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+                f"{presentation_relationships}"
+                "</Relationships>"
+            ),
+        )
+        for index, text in enumerate(slide_texts, start=1):
+            archive.writestr(
+                f"ppt/slides/slide{index}.xml",
+                (
+                    '<?xml version="1.0" encoding="UTF-8"?>'
+                    '<p:sld xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main" '
+                    'xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">'
+                    "<p:cSld><p:spTree><p:sp><p:txBody><a:bodyPr/><a:lstStyle/>"
+                    f"<a:p><a:r><a:t>{escape(text)}</a:t></a:r></a:p>"
+                    "</p:txBody></p:sp></p:spTree></p:cSld>"
+                    "</p:sld>"
+                ),
+            )
+
+
+def _rendered_pptx_slide_texts(document: bytes) -> list[str]:
+    with zipfile.ZipFile(BytesIO(document)) as archive:
+        presentation = ElementTree.fromstring(archive.read("ppt/presentation.xml"))
+        rels = ElementTree.fromstring(archive.read("ppt/_rels/presentation.xml.rels"))
+        targets = {
+            relationship.attrib["Id"]: relationship.attrib["Target"]
+            for relationship in rels.iter(RELATIONSHIP)
+        }
+
+        texts: list[str] = []
+        for slide_id in presentation.iter(PRESENTATION_SLIDE_ID):
+            slide_path = f"ppt/{targets[slide_id.attrib[REL_ID]]}"
+            root = ElementTree.fromstring(archive.read(slide_path))
+            texts.append(
+                " ".join(node.text for node in root.iter(PPTX_TEXT) if node.text)
+            )
+        return texts
+
+
 def test_render_rejects_unsupported_template_suffix() -> None:
     with pytest.raises(UnsupportedFormatError):
-        render("template.pptx", {})
+        render("template.odp", {})
 
 
 def test_render_rejects_unsupported_output_format() -> None:
@@ -130,6 +238,72 @@ def test_xlsx_row_loop_clones_rows_and_translates_formulas(tmp_path: Path) -> No
     assert sheet["D4"].value == "=SUM(D3:D3)"
 
 
+def test_pptx_simple_substitutions_preserve_slide_order(tmp_path: Path) -> None:
+    template = tmp_path / "template.pptx"
+    _write_minimal_pptx(
+        template,
+        [
+            "Status for {{ customer.name }}",
+            "{% if project.on_track %}On track{% else %}At risk{% endif %}",
+        ],
+    )
+
+    rendered = render(
+        template,
+        {"customer": {"name": "Acme Studio"}, "project": {"on_track": True}},
+    )
+
+    assert _rendered_pptx_slide_texts(rendered) == [
+        "Status for Acme Studio",
+        "On track",
+    ]
+
+
+def test_pptx_slide_loop_clones_slides_and_rewrites_relationships(tmp_path: Path) -> None:
+    template = tmp_path / "template.pptx"
+    _write_minimal_pptx(
+        template,
+        [
+            "Executive summary",
+            "{% for milestone in milestones %}",
+            "{{ milestone.name }}: {{ milestone.status }}",
+            "{% endfor %}",
+            "Thank you",
+        ],
+    )
+
+    rendered = render(
+        template,
+        {
+            "milestones": [
+                {"name": "Design", "status": "Done"},
+                {"name": "Build", "status": "Active"},
+            ]
+        },
+    )
+
+    assert _rendered_pptx_slide_texts(rendered) == [
+        "Executive summary",
+        "Design: Done",
+        "Build: Active",
+        "Thank you",
+    ]
+
+    with zipfile.ZipFile(BytesIO(rendered)) as archive:
+        presentation = archive.read("ppt/presentation.xml").decode("utf-8")
+        relationships = archive.read("ppt/_rels/presentation.xml.rels").decode("utf-8")
+        assert len(re.findall(r"<p:sldId\b", presentation)) == 4
+        assert "slides/slide6.xml" in relationships
+        assert "slides/slide7.xml" in relationships
+
+
+def test_render_converts_pptx_to_pdf(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(render_module, "render_pptx", lambda path, data: b"pptx")
+    monkeypatch.setattr(render_module, "convert_pptx_to_pdf", lambda source: b"%PDF slides")
+
+    assert render("template.pptx", {}, output_format="pdf") == b"%PDF slides"
+
+
 def test_render_converts_xlsx_to_pdf(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(render_module, "render_xlsx", lambda path, data: b"xlsx")
     monkeypatch.setattr(render_module, "convert_xlsx_to_pdf", lambda source: b"%PDF spreadsheet")
@@ -176,6 +350,24 @@ def test_styled_status_report_example_matches_expected_output_text() -> None:
     assert "Render with JSON data Engineering 2026-06-28" in text
     assert "Review output formatting Operations 2026-06-29" in text
     assert "Risk note: Do not put style instructions in JSON" in text
+
+
+def test_pptx_status_example_matches_expected_output_text() -> None:
+    payload = json.loads(Path("examples/data/pptx-status.json").read_text(encoding="utf-8"))
+
+    rendered = render("examples/templates/pptx-status.pptx", payload)
+
+    assert _rendered_pptx_slide_texts(rendered) == [
+        "STENCIL EXAMPLE Stencil PPTX Engine Owner: Platform Tools "
+        "Status: Ready for internal review "
+        "This is a template deck; render it to create a presentation.",
+        "MILESTONE Text placeholders Complete Slide text is rendered with Jinja data.",
+        "MILESTONE Repeated slides Complete Marker slides expand one detail slide per milestone.",
+        "MILESTONE PDF export Available "
+        "LibreOffice conversion uses the same PDF worker as DOCX and XLSX.",
+        "NEXT STEP Open the rendered deck Confirm the milestone detail slide was repeated once "
+        "for each item in the JSON data.",
+    ]
 
 
 def test_render_converts_docx_to_pdf(monkeypatch: pytest.MonkeyPatch) -> None:
