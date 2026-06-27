@@ -41,7 +41,7 @@ class LibreOfficePdfConverter:
         """
 
         normalized_suffix = source_suffix.lower()
-        if normalized_suffix != ".docx":
+        if normalized_suffix not in {".docx", ".xlsx"}:
             raise PdfConversionError(
                 f"PDF conversion from {normalized_suffix or '<none>'} is not supported",
                 stage="convert",
@@ -166,6 +166,13 @@ def convert_docx_to_pdf(source: bytes, converter: ConversionWorker | None = None
 
     worker = converter or LibreOfficePdfConverter()
     return worker.convert(source, source_suffix=".docx")
+
+
+def convert_xlsx_to_pdf(source: bytes, converter: ConversionWorker | None = None) -> bytes:
+    """Convert rendered XLSX bytes to PDF bytes."""
+
+    worker = converter or LibreOfficePdfConverter()
+    return worker.convert(source, source_suffix=".xlsx")
 
 
 def _summarize_process_output(stdout: bytes, stderr: bytes) -> str:

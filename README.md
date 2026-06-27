@@ -8,26 +8,28 @@ It is designed for workflows where a `.docx`, `.xlsx`, or `.pptx` template conta
 stencil render invoice.docx data.json --output invoice.pdf
 ```
 
-The project starts with DOCX because it is the fastest path to a useful internal tool. XLSX and PPTX are planned as separate format engines behind the same public API.
+The project started with DOCX because it was the fastest path to a useful internal tool. XLSX now uses a separate spreadsheet engine behind the same public API, and PPTX remains a later roadmap phase.
 
 ## Status
 
-Pre-alpha DOCX and PDF MVP.
+Pre-alpha internal Office render package.
 
 What exists now:
 
 - `uv`-compatible Python package metadata
 - Python `>=3.12`
 - `stencil` import package
-- `render()` API for DOCX templates
+- `render()` API for DOCX and XLSX templates
 - `stencil render` CLI command for JSON data
-- PDF output through LibreOffice conversion
+- PDF output through LibreOffice conversion for DOCX and XLSX templates
+- template authoring guidance for supported DOCX features
+- XLSX cell substitutions and row loops
+- versioned sample templates covered by expected-output tests
 - DOCX-first roadmap in local ignored docs
 
 What does not exist yet:
 
 - Stable public API
-- XLSX rendering
 - PPTX rendering
 
 ## Naming
@@ -61,18 +63,67 @@ document = render(
 )
 ```
 
-DOCX templates can currently render to `docx` or `pdf`. The exact API may change while the project is pre-alpha.
+DOCX templates can currently render to `docx` or `pdf`. XLSX templates can render to `xlsx` or `pdf`. The local Python API is the stable package boundary for the internal tool while the project remains pre-alpha.
 
 ## CLI
 
 ```bash
 stencil render invoice.docx data.json --output invoice.docx
 stencil render invoice.docx data.json --output invoice.pdf
+stencil render workbook.xlsx data.json --output workbook.xlsx
+stencil render workbook.xlsx data.json --output workbook.pdf
 ```
 
 The CLI reads a top-level JSON object from the data file and writes the rendered document bytes to the output path.
 
 PDF output requires LibreOffice to be installed and available as `soffice` or `libreoffice`.
+
+## Template Authoring
+
+Stencil templates are regular Word documents with Jinja-style tags in editable text. Design the document visually in Word or LibreOffice first, then replace only dynamic values with placeholders.
+
+Supported DOCX features:
+
+- variable replacement, such as `{{ customer.name }}`
+- conditionals, such as `{% if invoice.note %}...{% endif %}`
+- loops over lists, such as `{% for item in line_items %}...{% endfor %}`
+- nested object and list access supported by Jinja2
+- formatting inherited from the placeholder text in the template
+
+Supported XLSX features:
+
+- variable replacement in text cells, such as `{{ customer.name }}`
+- typed whole-cell expressions, such as `{{ invoice.total }}`
+- row loops with one or more body rows between `{% for item in line_items %}` and `{% endfor %}`
+- style, number-format, row-height, and multiple-sheet preservation for rendered cells
+- relative formula translation inside cloned loop rows
+
+Authoring rules:
+
+- Keep one complete Jinja tag in one editable text run when possible. If Word splits a tag across runs, retype the whole tag in one pass.
+- Keep styles, table borders, headers, footers, and layout in the DOCX template, not in JSON data.
+- For XLSX row loops, put the loop start and end tags in their own cells on their own rows.
+- Use a top-level JSON object for CLI data.
+- Use UTF-8 JSON and pass plain values, lists, and objects.
+- Keep templates trusted. Stencil does not sandbox untrusted Office templates.
+
+Known limitations:
+
+- Only DOCX and XLSX input are supported.
+- DOCX output formats are `docx` and `pdf`; XLSX output formats are `xlsx` and `pdf`.
+- PDF output requires LibreOffice.
+- XLSX chart rewriting, complex formula-range adjustment, PPTX, hosted APIs, Redis, Celery, and sandboxing are intentionally outside the current package boundary.
+- Inline image replacement is not part of the packaged internal-tool API yet.
+
+Troubleshooting:
+
+- `Template file does not exist`: check the template path passed to the API or CLI.
+- `Unsupported template format`: use a `.docx` or `.xlsx` template.
+- `Unsupported output format`: use `docx`, `xlsx`, or `pdf`, or choose an output path with one of those suffixes.
+- `Failed to render DOCX template`: check Jinja syntax and confirm every referenced field exists in the JSON object.
+- `Failed to render XLSX template`: check Jinja syntax, loop rows, and confirm every referenced field exists in the JSON object.
+- `PDF conversion requires LibreOffice`: install LibreOffice and confirm `soffice` or `libreoffice` is on `PATH`.
+- `LibreOffice PDF conversion timed out`: open the rendered document manually and simplify or repair the template.
 
 ## Example
 
@@ -82,6 +133,8 @@ See [examples/](examples/) for a runnable DOCX example with:
 - `examples/data/invoice.json`
 - `examples/templates/styled-status-report.docx`
 - `examples/data/status-report.json`
+
+These examples are versioned with the package and covered by tests that check the rendered user-visible text.
 
 ```bash
 uv sync --dev
@@ -109,7 +162,7 @@ Runtime dependencies:
 - `jinja2`: template expressions, conditionals, and loops
 - `docxtpl`: DOCX rendering for the first production milestone
 - `lxml`: Office XML parsing and manipulation
-- `openpyxl`: XLSX workbook inspection and future spreadsheet support
+- `openpyxl`: XLSX workbook loading, editing, and serialization
 - `typer`: CLI framework
 
 Optional API dependencies:
@@ -209,7 +262,7 @@ Office files are zipped XML packages, but each format has different failure mode
 - PPTX repeated slides require cloning slide XML, relationships, presentation ordering, and content type entries.
 - PDF conversion through LibreOffice needs timeouts, retries, cleanup, and worker isolation.
 
-Stencil should stay milestone-driven: ship a reliable DOCX engine first, then use real needs to decide when XLSX, PPTX, and service infrastructure are worth the extra complexity.
+Stencil should stay milestone-driven: keep the reliable DOCX and XLSX engines focused, then use real needs to decide when PPTX and service infrastructure are worth the extra complexity.
 
 ## License
 
