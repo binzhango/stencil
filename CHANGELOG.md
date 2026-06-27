@@ -2,6 +2,15 @@
 
 All notable changes to Stencil are documented here.
 
+## 0.5.0 - 2026-06-27
+
+### Added
+
+- Added PPTX rendering with slide text substitutions and repeated-slide loops.
+- Added an optional FastAPI service layer for trusted internal callers.
+- Added health and metrics endpoints with per-process render/failure counters.
+- Documented the optional service entrypoint and operational boundary.
+
 ## 0.4.0 - 2026-06-26
 
 ### Added

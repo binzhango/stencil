@@ -23,6 +23,7 @@ What exists now:
 - PPTX text substitutions and repeated-slide loops
 - `stencil render` CLI command for JSON data
 - PDF output through LibreOffice conversion for DOCX, PPTX, and XLSX templates
+- optional FastAPI service wrapper for trusted internal callers
 - template authoring guidance for supported DOCX, PPTX, and XLSX features
 - XLSX cell substitutions and row loops
 - versioned sample templates covered by expected-output tests
@@ -30,7 +31,7 @@ What exists now:
 
 What does not exist yet:
 
-- Stable public API
+- distributed queues, untrusted template sandboxing, or hosted multi-tenant operations
 
 ## Naming
 
@@ -80,6 +81,36 @@ The CLI reads a top-level JSON object from the data file and writes the rendered
 
 PDF output requires LibreOffice to be installed and available as `soffice` or `libreoffice`.
 
+## Optional Service
+
+The Python API and CLI are the primary package boundary. When another internal
+system needs HTTP access, install the optional API dependencies and run the
+trusted service wrapper:
+
+```bash
+uv sync --extra api --dev
+uv run uvicorn 'stencil.api:create_app' --factory
+```
+
+The service exposes:
+
+- `GET /healthz` for process health
+- `GET /metrics` for in-memory render and failure counters
+- `POST /render` with `template_path`, `data`, and optional `output_format`
+
+For deployments that serve a known template directory, pass a template root from
+application code:
+
+```python
+from stencil.api import create_app
+
+app = create_app(template_root="/srv/stencil/templates")
+```
+
+The service is still trusted-internal infrastructure. It logs render outcomes and
+keeps per-process counters, but it does not sandbox untrusted templates or add a
+distributed queue.
+
 ## Template Authoring
 
 Stencil templates are regular Word documents with Jinja-style tags in editable text. Design the document visually in Word or LibreOffice first, then replace only dynamic values with placeholders.
@@ -127,7 +158,7 @@ Known limitations:
 Troubleshooting:
 
 - `Template file does not exist`: check the template path passed to the API or CLI.
-- `Unsupported template format`: use a `.docx` or `.xlsx` template.
+- `Unsupported template format`: use a `.docx`, `.xlsx`, or `.pptx` template.
 - `Unsupported output format`: use `docx`, `xlsx`, or `pdf`, or choose an output path with one of those suffixes.
 - `Failed to render DOCX template`: check Jinja syntax and confirm every referenced field exists in the JSON object.
 - `Failed to render PPTX template`: check Jinja syntax, repeated-slide marker slides, and confirm every referenced field exists in the JSON object.
@@ -166,6 +197,11 @@ uv run stencil render examples/templates/pptx-status.pptx examples/data/pptx-sta
 6. PPTX engine
 7. Optional service layer and operations
 
+All roadmap phases now have a first internal implementation. Future work should
+be driven by specific production needs, such as persistent metrics export,
+queue-backed workloads, sandboxing for untrusted templates, image replacement,
+or richer chart/formula rewrites.
+
 The detailed local roadmap lives in `docs/`, which is intentionally ignored by git because it is personal planning material.
 
 ## Dependencies
@@ -180,7 +216,7 @@ Runtime dependencies:
 
 Optional API dependencies:
 
-- `fastapi`: future HTTP service layer
+- `fastapi`: optional HTTP service layer
 - `uvicorn[standard]`: ASGI server for the optional API
 
 Optional worker dependencies:
