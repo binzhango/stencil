@@ -1,6 +1,8 @@
-# Stencil DOCX Example
+# Stencil Examples
 
 This folder contains DOCX templates and JSON payloads that show the Stencil workflow.
+
+The examples are versioned package fixtures. When a template or payload changes, update the expected-output tests in `tests/test_render.py` in the same change.
 
 ## Files
 
@@ -18,6 +20,14 @@ The template includes:
 - a loop over `line_items`
 
 The styled status report example shows the recommended workflow for complex formatting: design the Word document visually first, then replace only the dynamic text with placeholders. The rendered values inherit the styles from the template.
+
+## Authoring Rules
+
+- Keep dynamic data in JSON and visual design in the DOCX template.
+- Use complete Jinja tags such as `{{ project.name }}` and `{% if risk_note %}`.
+- Retype a whole tag if Word splits or styles only part of it.
+- Test templates with the CLI before using them in another application.
+- Keep templates trusted; Stencil does not sandbox untrusted documents.
 
 ## Run With The CLI
 
@@ -79,4 +89,4 @@ Path("examples/out/styled-status-report.pdf").write_bytes(document)
 
 ## Current Limitation
 
-Stencil currently supports DOCX input with DOCX or PDF output. XLSX and PPTX are later roadmap phases.
+Stencil currently supports DOCX input with DOCX or PDF output, and XLSX input with XLSX or PDF output. PPTX is a later roadmap phase.
