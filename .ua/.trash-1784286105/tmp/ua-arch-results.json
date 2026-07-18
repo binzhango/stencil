@@ -1,0 +1,524 @@
+{
+  "scriptCompleted": true,
+  "commonPathPrefix": "",
+  "directoryGroups": {
+    "src": [
+      "file:src/stencil/api.py",
+      "file:src/stencil/cli.py",
+      "file:src/stencil/docx.py",
+      "file:src/stencil/errors.py",
+      "file:src/stencil/pptx.py",
+      "file:src/stencil/render.py",
+      "file:src/stencil/xlsx.py",
+      "file:src/stencil/__init__.py",
+      "file:src/stencil/_version.py",
+      "file:src/stencil/pdf.py",
+      "file:src/stencil/py.typed"
+    ],
+    ".github": [
+      "pipeline:.github/workflows/publish.yml",
+      "config:.github/dependabot.yml"
+    ],
+    "root": [
+      "document:CHANGELOG.md",
+      "document:README.md",
+      "config:pyproject.toml"
+    ],
+    "examples": [
+      "config:examples/data/invoice.json",
+      "config:examples/data/pptx-status.json",
+      "config:examples/data/status-report.json",
+      "document:examples/README.md",
+      "file:examples/scripts/create_pptx_status_template.py",
+      "file:examples/scripts/create_styled_status_template.py",
+      "file:examples/scripts/render_styled_status_pdf.py",
+      "file:examples/templates/invoice.docx",
+      "file:examples/templates/pptx-status.pptx",
+      "file:examples/templates/styled-status-report.docx"
+    ],
+    ".ua": [
+      "file:.ua/.understandignore",
+      "config:.ua/config.json"
+    ],
+    "guides": [
+      "document:guides/python-package-cicd-agent-guide.md"
+    ],
+    "tests": [
+      "file:tests/.gitkeep",
+      "file:tests/test_api.py",
+      "file:tests/test_render.py"
+    ]
+  },
+  "nodeTypeGroups": {
+    "file": [
+      "file:src/stencil/api.py",
+      "file:src/stencil/cli.py",
+      "file:src/stencil/docx.py",
+      "file:src/stencil/errors.py",
+      "file:src/stencil/pptx.py",
+      "file:src/stencil/render.py",
+      "file:src/stencil/xlsx.py",
+      "file:src/stencil/__init__.py",
+      "file:src/stencil/_version.py",
+      "file:src/stencil/pdf.py",
+      "file:.ua/.understandignore",
+      "file:examples/scripts/create_pptx_status_template.py",
+      "file:examples/scripts/create_styled_status_template.py",
+      "file:examples/scripts/render_styled_status_pdf.py",
+      "file:examples/templates/invoice.docx",
+      "file:examples/templates/pptx-status.pptx",
+      "file:examples/templates/styled-status-report.docx",
+      "file:src/stencil/py.typed",
+      "file:tests/.gitkeep",
+      "file:tests/test_api.py",
+      "file:tests/test_render.py"
+    ],
+    "pipeline": [
+      "pipeline:.github/workflows/publish.yml"
+    ],
+    "document": [
+      "document:CHANGELOG.md",
+      "document:README.md",
+      "document:examples/README.md",
+      "document:guides/python-package-cicd-agent-guide.md"
+    ],
+    "config": [
+      "config:pyproject.toml",
+      "config:examples/data/invoice.json",
+      "config:examples/data/pptx-status.json",
+      "config:examples/data/status-report.json",
+      "config:.github/dependabot.yml",
+      "config:.ua/config.json"
+    ]
+  },
+  "importAdjacency": {
+    "file:src/stencil/api.py": [
+      "file:src/stencil/errors.py",
+      "file:src/stencil/render.py"
+    ],
+    "file:src/stencil/cli.py": [
+      "file:src/stencil/errors.py",
+      "file:src/stencil/render.py"
+    ],
+    "file:src/stencil/docx.py": [
+      "file:src/stencil/errors.py"
+    ],
+    "file:src/stencil/errors.py": [],
+    "file:src/stencil/pptx.py": [
+      "file:src/stencil/errors.py"
+    ],
+    "file:src/stencil/render.py": [
+      "file:src/stencil/docx.py",
+      "file:src/stencil/errors.py",
+      "file:src/stencil/pdf.py",
+      "file:src/stencil/pptx.py",
+      "file:src/stencil/xlsx.py"
+    ],
+    "file:src/stencil/xlsx.py": [
+      "file:src/stencil/errors.py"
+    ],
+    "file:src/stencil/__init__.py": [
+      "file:src/stencil/_version.py",
+      "file:src/stencil/errors.py",
+      "file:src/stencil/pdf.py",
+      "file:src/stencil/render.py"
+    ],
+    "file:src/stencil/_version.py": [],
+    "file:src/stencil/pdf.py": [
+      "file:src/stencil/errors.py"
+    ],
+    "pipeline:.github/workflows/publish.yml": [],
+    "document:CHANGELOG.md": [],
+    "document:README.md": [],
+    "config:pyproject.toml": [],
+    "config:examples/data/invoice.json": [],
+    "config:examples/data/pptx-status.json": [],
+    "config:examples/data/status-report.json": [],
+    "config:.github/dependabot.yml": [],
+    "file:.ua/.understandignore": [],
+    "config:.ua/config.json": [],
+    "document:examples/README.md": [],
+    "file:examples/scripts/create_pptx_status_template.py": [],
+    "file:examples/scripts/create_styled_status_template.py": [],
+    "file:examples/scripts/render_styled_status_pdf.py": [],
+    "file:examples/templates/invoice.docx": [],
+    "file:examples/templates/pptx-status.pptx": [],
+    "file:examples/templates/styled-status-report.docx": [],
+    "document:guides/python-package-cicd-agent-guide.md": [],
+    "file:src/stencil/py.typed": [],
+    "file:tests/.gitkeep": [],
+    "file:tests/test_api.py": [],
+    "file:tests/test_render.py": []
+  },
+  "groupConnections": {
+    "src": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    ".github": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "root": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "examples": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    ".ua": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "guides": {
+      "importsFrom": [],
+      "importedBy": []
+    },
+    "tests": {
+      "importsFrom": [],
+      "importedBy": []
+    }
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "config",
+      "toType": "document",
+      "edgeType": "configures",
+      "count": 1
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "related",
+      "count": 1
+    },
+    {
+      "fromType": "document",
+      "toType": "config",
+      "edgeType": "documents",
+      "count": 3
+    },
+    {
+      "fromType": "document",
+      "toType": "document",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "document",
+      "toType": "file",
+      "edgeType": "documents",
+      "count": 6
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "imports",
+      "count": 17
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "related",
+      "count": 2
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "tested_by",
+      "count": 3
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "config",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "document",
+      "edgeType": "depends_on",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "file",
+      "edgeType": "deploys",
+      "count": 1
+    },
+    {
+      "fromType": "pipeline",
+      "toType": "file",
+      "edgeType": "triggers",
+      "count": 2
+    }
+  ],
+  "nonCodeConnections": [
+    {
+      "source": "pipeline:.github/workflows/publish.yml",
+      "target": "config:pyproject.toml",
+      "type": "depends_on"
+    },
+    {
+      "source": "pipeline:.github/workflows/publish.yml",
+      "target": "document:CHANGELOG.md",
+      "type": "depends_on"
+    },
+    {
+      "source": "pipeline:.github/workflows/publish.yml",
+      "target": "file:tests/test_api.py",
+      "type": "triggers"
+    },
+    {
+      "source": "pipeline:.github/workflows/publish.yml",
+      "target": "file:tests/test_render.py",
+      "type": "triggers"
+    },
+    {
+      "source": "pipeline:.github/workflows/publish.yml",
+      "target": "file:src/stencil/__init__.py",
+      "type": "deploys"
+    },
+    {
+      "source": "document:CHANGELOG.md",
+      "target": "config:pyproject.toml",
+      "type": "documents"
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:pyproject.toml",
+      "type": "documents"
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:CHANGELOG.md",
+      "type": "documents"
+    },
+    {
+      "source": "config:pyproject.toml",
+      "target": "document:README.md",
+      "type": "configures"
+    },
+    {
+      "source": "config:.ua/config.json",
+      "target": "file:.ua/.understandignore",
+      "type": "related"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/scripts/create_pptx_status_template.py",
+      "type": "documents"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/scripts/create_styled_status_template.py",
+      "type": "documents"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/scripts/render_styled_status_pdf.py",
+      "type": "documents"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/templates/invoice.docx",
+      "type": "documents"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/templates/pptx-status.pptx",
+      "type": "documents"
+    },
+    {
+      "source": "document:examples/README.md",
+      "target": "file:examples/templates/styled-status-report.docx",
+      "type": "documents"
+    },
+    {
+      "source": "document:guides/python-package-cicd-agent-guide.md",
+      "target": "config:.github/dependabot.yml",
+      "type": "documents"
+    }
+  ],
+  "interGroupImports": [],
+  "intraGroupDensity": {
+    "src": {
+      "internalEdges": 17,
+      "totalEdges": 17,
+      "density": 1
+    },
+    ".github": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "examples": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    ".ua": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "guides": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "tests": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    }
+  },
+  "patternMatches": {
+    ".github": "ci-cd",
+    "guides": "documentation",
+    "tests": "test"
+  },
+  "filePatternMatches": {
+    "file:src/stencil/__init__.py": "entry",
+    "pipeline:.github/workflows/publish.yml": "ci-cd",
+    "document:CHANGELOG.md": "documentation",
+    "document:README.md": "documentation",
+    "config:pyproject.toml": "config",
+    "document:examples/README.md": "documentation",
+    "document:guides/python-package-cicd-agent-guide.md": "documentation",
+    "file:tests/test_api.py": "test",
+    "file:tests/test_render.py": "test"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": false,
+    "hasCompose": false,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": true,
+    "infraFiles": [
+      ".github/workflows/publish.yml"
+    ]
+  },
+  "dataPipeline": {
+    "schemaFiles": [],
+    "migrationFiles": [],
+    "dataModelFiles": [
+      "src/stencil/errors.py",
+      "src/stencil/py.typed"
+    ],
+    "apiHandlerFiles": [
+      "src/stencil/api.py",
+      "src/stencil/cli.py",
+      "tests/test_api.py"
+    ]
+  },
+  "docCoverage": {
+    "groupsWithDocs": 4,
+    "totalGroups": 7,
+    "coverageRatio": 0.5714285714285714,
+    "undocumentedGroups": [
+      "src",
+      ".ua",
+      "tests"
+    ]
+  },
+  "dependencyDirection": [],
+  "fileStats": {
+    "totalFileNodes": 32,
+    "filesPerGroup": {
+      "src": 11,
+      ".github": 2,
+      "root": 3,
+      "examples": 10,
+      ".ua": 2,
+      "guides": 1,
+      "tests": 3
+    },
+    "nodeTypeCounts": {
+      "file": 21,
+      "pipeline": 1,
+      "document": 4,
+      "config": 6
+    }
+  },
+  "fileFanIn": {
+    "file:src/stencil/api.py": 0,
+    "file:src/stencil/cli.py": 0,
+    "file:src/stencil/docx.py": 1,
+    "file:src/stencil/errors.py": 8,
+    "file:src/stencil/pptx.py": 1,
+    "file:src/stencil/render.py": 3,
+    "file:src/stencil/xlsx.py": 1,
+    "file:src/stencil/__init__.py": 0,
+    "file:src/stencil/_version.py": 1,
+    "file:src/stencil/pdf.py": 2,
+    "pipeline:.github/workflows/publish.yml": 0,
+    "document:CHANGELOG.md": 0,
+    "document:README.md": 0,
+    "config:pyproject.toml": 0,
+    "config:examples/data/invoice.json": 0,
+    "config:examples/data/pptx-status.json": 0,
+    "config:examples/data/status-report.json": 0,
+    "config:.github/dependabot.yml": 0,
+    "file:.ua/.understandignore": 0,
+    "config:.ua/config.json": 0,
+    "document:examples/README.md": 0,
+    "file:examples/scripts/create_pptx_status_template.py": 0,
+    "file:examples/scripts/create_styled_status_template.py": 0,
+    "file:examples/scripts/render_styled_status_pdf.py": 0,
+    "file:examples/templates/invoice.docx": 0,
+    "file:examples/templates/pptx-status.pptx": 0,
+    "file:examples/templates/styled-status-report.docx": 0,
+    "document:guides/python-package-cicd-agent-guide.md": 0,
+    "file:src/stencil/py.typed": 0,
+    "file:tests/.gitkeep": 0,
+    "file:tests/test_api.py": 0,
+    "file:tests/test_render.py": 0
+  },
+  "fileFanOut": {
+    "file:src/stencil/api.py": 2,
+    "file:src/stencil/cli.py": 2,
+    "file:src/stencil/docx.py": 1,
+    "file:src/stencil/errors.py": 0,
+    "file:src/stencil/pptx.py": 1,
+    "file:src/stencil/render.py": 5,
+    "file:src/stencil/xlsx.py": 1,
+    "file:src/stencil/__init__.py": 4,
+    "file:src/stencil/_version.py": 0,
+    "file:src/stencil/pdf.py": 1,
+    "pipeline:.github/workflows/publish.yml": 0,
+    "document:CHANGELOG.md": 0,
+    "document:README.md": 0,
+    "config:pyproject.toml": 0,
+    "config:examples/data/invoice.json": 0,
+    "config:examples/data/pptx-status.json": 0,
+    "config:examples/data/status-report.json": 0,
+    "config:.github/dependabot.yml": 0,
+    "file:.ua/.understandignore": 0,
+    "config:.ua/config.json": 0,
+    "document:examples/README.md": 0,
+    "file:examples/scripts/create_pptx_status_template.py": 0,
+    "file:examples/scripts/create_styled_status_template.py": 0,
+    "file:examples/scripts/render_styled_status_pdf.py": 0,
+    "file:examples/templates/invoice.docx": 0,
+    "file:examples/templates/pptx-status.pptx": 0,
+    "file:examples/templates/styled-status-report.docx": 0,
+    "document:guides/python-package-cicd-agent-guide.md": 0,
+    "file:src/stencil/py.typed": 0,
+    "file:tests/.gitkeep": 0,
+    "file:tests/test_api.py": 0,
+    "file:tests/test_render.py": 0
+  }
+}

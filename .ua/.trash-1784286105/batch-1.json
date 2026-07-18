@@ -1,0 +1,1461 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/stencil/api.py",
+      "type": "file",
+      "name": "api.py",
+      "filePath": "src/stencil/api.py",
+      "summary": "Optional FastAPI service exposing health, metrics, and Office-template rendering endpoints for trusted internal callers, with bounded template-path resolution and in-process render telemetry.",
+      "tags": [
+        "api-handler",
+        "service",
+        "metrics",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/stencil/api.py:RenderMetrics",
+      "type": "class",
+      "name": "RenderMetrics",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        21,
+        57
+      ],
+      "summary": "Thread-safe in-memory counters that record render successes, failures, durations, formats, and failure stages for one API process.",
+      "tags": [
+        "data-model",
+        "metrics",
+        "thread-safety"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/api.py:create_app",
+      "type": "function",
+      "name": "create_app",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        60,
+        145
+      ],
+      "summary": "Builds the optional FastAPI application, lazily imports API dependencies, and registers health, metrics, and render routes around a configurable renderer.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/stencil/api.py:_template_path_from_payload",
+      "type": "function",
+      "name": "_template_path_from_payload",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        148,
+        163
+      ],
+      "summary": "Validates the request template path and, when a template root is configured, prevents resolved paths from escaping that root.",
+      "tags": [
+        "utility",
+        "validation",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/api.py:_output_format_from_payload",
+      "type": "function",
+      "name": "_output_format_from_payload",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        166,
+        172
+      ],
+      "summary": "Normalizes an explicit output format or derives it from the template suffix, rejecting malformed request values.",
+      "tags": [
+        "utility",
+        "validation",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/api.py:_media_type_for",
+      "type": "function",
+      "name": "_media_type_for",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        175,
+        181
+      ],
+      "summary": "Maps supported output formats to Office or PDF media types with a binary fallback.",
+      "tags": [
+        "utility",
+        "validation",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/api.py:_http_exception",
+      "type": "function",
+      "name": "_http_exception",
+      "filePath": "src/stencil/api.py",
+      "lineRange": [
+        184,
+        191
+      ],
+      "summary": "Lazily constructs a FastAPI HTTPException while preserving the package's optional API dependency boundary.",
+      "tags": [
+        "utility",
+        "rendering",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/cli.py",
+      "type": "file",
+      "name": "cli.py",
+      "filePath": "src/stencil/cli.py",
+      "summary": "Typer command-line interface that loads JSON render data, dispatches Office template rendering, and writes the resulting document with user-friendly errors.",
+      "tags": [
+        "entry-point",
+        "cli",
+        "api-handler",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/cli.py:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "src/stencil/cli.py",
+      "lineRange": [
+        17,
+        18
+      ],
+      "summary": "Defines the Typer application callback and CLI command-group entry point.",
+      "tags": [
+        "entry-point",
+        "cli",
+        "command-group"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/cli.py:render_command",
+      "type": "function",
+      "name": "render_command",
+      "filePath": "src/stencil/cli.py",
+      "lineRange": [
+        22,
+        57
+      ],
+      "summary": "Loads and validates a JSON object, invokes the public renderer, and writes the rendered bytes to a requested output path.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/docx.py",
+      "type": "file",
+      "name": "docx.py",
+      "filePath": "src/stencil/docx.py",
+      "summary": "DOCX renderer that validates a template path, delegates Jinja-compatible WordprocessingML rendering to docxtpl, and returns the serialized document bytes.",
+      "tags": [
+        "service",
+        "docx",
+        "templating",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/docx.py:render_docx",
+      "type": "function",
+      "name": "render_docx",
+      "filePath": "src/stencil/docx.py",
+      "lineRange": [
+        11,
+        55
+      ],
+      "summary": "Validates and loads a DOCX template, renders it with docxtpl using mapping data, and serializes the result to bytes with stage-specific errors.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/errors.py",
+      "type": "file",
+      "name": "errors.py",
+      "filePath": "src/stencil/errors.py",
+      "summary": "Defines the Stencil exception hierarchy, including unsupported-format errors and stage-aware render failures that retain template context.",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "validation",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/stencil/errors.py:StencilError",
+      "type": "class",
+      "name": "StencilError",
+      "filePath": "src/stencil/errors.py",
+      "lineRange": [
+        6,
+        7
+      ],
+      "summary": "Base exception used to distinguish Stencil failures from unrelated runtime errors.",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/stencil/errors.py:UnsupportedFormatError",
+      "type": "class",
+      "name": "UnsupportedFormatError",
+      "filePath": "src/stencil/errors.py",
+      "lineRange": [
+        10,
+        11
+      ],
+      "summary": "Signals unsupported template suffixes or requested output-format combinations.",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/stencil/errors.py:RenderError",
+      "type": "class",
+      "name": "RenderError",
+      "filePath": "src/stencil/errors.py",
+      "lineRange": [
+        14,
+        36
+      ],
+      "summary": "Carries render-stage and template-path context and incorporates those diagnostics into the exception message.",
+      "tags": [
+        "type-definition",
+        "error-handling",
+        "diagnostics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/pptx.py",
+      "type": "file",
+      "name": "pptx.py",
+      "filePath": "src/stencil/pptx.py",
+      "summary": "PPTX rendering engine that edits Open Packaging Convention parts directly, expands slide-level Jinja loops, renders text across XML runs, and rebuilds presentation relationships and content types.",
+      "tags": [
+        "service",
+        "pptx",
+        "templating",
+        "xml-processing",
+        "serialization"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses zipfile and ElementTree to manipulate Open Packaging Convention and PresentationML parts without a high-level presentation library."
+    },
+    {
+      "id": "function:src/stencil/pptx.py:render_pptx",
+      "type": "function",
+      "name": "render_pptx",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        40,
+        85
+      ],
+      "summary": "Loads a PPTX ZIP package, plans and renders slide content, rewrites presentation metadata, and returns a compressed rendered package.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_read_slide_refs",
+      "type": "function",
+      "name": "_read_slide_refs",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        88,
+        107
+      ],
+      "summary": "Resolves the ordered presentation slide IDs and relationship targets into package-part references.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_build_render_plan",
+      "type": "function",
+      "name": "_build_render_plan",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        110,
+        151
+      ],
+      "summary": "Builds the final ordered slide plan, cloning loop-body slides once per evaluated item while retaining ordinary slides.",
+      "tags": [
+        "utility",
+        "rendering",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_find_slide_loop_blocks",
+      "type": "function",
+      "name": "_find_slide_loop_blocks",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        154,
+        186
+      ],
+      "summary": "Scans slide paragraph text for balanced Jinja for/endfor markers and returns validated slide-loop boundaries.",
+      "tags": [
+        "utility",
+        "templating",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_slide_paragraph_texts",
+      "type": "function",
+      "name": "_slide_paragraph_texts",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        189,
+        199
+      ],
+      "summary": "Collects paragraph text from DrawingML XML while joining text split across multiple runs.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_render_planned_slides",
+      "type": "function",
+      "name": "_render_planned_slides",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        202,
+        212
+      ],
+      "summary": "Renders each slide in a prepared plan with the context assigned to that slide.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_render_slide_xml",
+      "type": "function",
+      "name": "_render_slide_xml",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        215,
+        236
+      ],
+      "summary": "Renders Jinja markup across DrawingML text runs and rewrites each affected paragraph into valid slide XML.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_rewrite_presentation",
+      "type": "function",
+      "name": "_rewrite_presentation",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        239,
+        326
+      ],
+      "summary": "Reconciles slide parts, slide IDs, relationships, and content-type declarations with the rendered slide plan.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_clone_slide_part",
+      "type": "function",
+      "name": "_clone_slide_part",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        329,
+        334
+      ],
+      "summary": "Copies a slide XML part and its optional relationships part to a new package path.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_max_slide_number",
+      "type": "function",
+      "name": "_max_slide_number",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        337,
+        343
+      ],
+      "summary": "Finds the largest numeric slide-part suffix in the PPTX package.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_is_slide_part",
+      "type": "function",
+      "name": "_is_slide_part",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        346,
+        347
+      ],
+      "summary": "Tests whether a package member follows the canonical numbered slide-part path.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_next_relationship_id",
+      "type": "function",
+      "name": "_next_relationship_id",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        350,
+        354
+      ],
+      "summary": "Allocates the first unused sequential presentation relationship identifier.",
+      "tags": [
+        "utility",
+        "rendering",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_slide_relationships_path",
+      "type": "function",
+      "name": "_slide_relationships_path",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        357,
+        359
+      ],
+      "summary": "Converts a slide-part path to its companion relationships-part path.",
+      "tags": [
+        "utility",
+        "validation",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_presentation_target_to_part",
+      "type": "function",
+      "name": "_presentation_target_to_part",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        362,
+        365
+      ],
+      "summary": "Normalizes a presentation relationship target into a package-relative part path.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_part_to_presentation_target",
+      "type": "function",
+      "name": "_part_to_presentation_target",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        368,
+        369
+      ],
+      "summary": "Converts a package part name into a relationship target relative to the presentation part.",
+      "tags": [
+        "utility",
+        "pptx",
+        "xml-processing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/pptx.py:_evaluate_iterable",
+      "type": "function",
+      "name": "_evaluate_iterable",
+      "filePath": "src/stencil/pptx.py",
+      "lineRange": [
+        372,
+        378
+      ],
+      "summary": "Evaluates a Jinja loop expression and requires a non-string sequence suitable for slide expansion.",
+      "tags": [
+        "utility",
+        "templating",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/render.py",
+      "type": "file",
+      "name": "render.py",
+      "filePath": "src/stencil/render.py",
+      "summary": "Public format dispatcher that validates template/output combinations, routes DOCX, XLSX, and PPTX work to their renderers, and optionally converts results to PDF.",
+      "tags": [
+        "entry-point",
+        "factory",
+        "validation",
+        "format-dispatch"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/stencil/render.py:render",
+      "type": "function",
+      "name": "render",
+      "filePath": "src/stencil/render.py",
+      "lineRange": [
+        17,
+        71
+      ],
+      "summary": "Validates source and destination formats, invokes the appropriate Office renderer, and performs optional format-specific PDF conversion.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/stencil/xlsx.py",
+      "type": "file",
+      "name": "xlsx.py",
+      "filePath": "src/stencil/xlsx.py",
+      "summary": "XLSX rendering engine that evaluates Jinja expressions in cells, expands row-loop blocks while preserving formatting, and translates copied formulas before serialization.",
+      "tags": [
+        "service",
+        "xlsx",
+        "templating",
+        "formula-translation",
+        "serialization"
+      ],
+      "complexity": "complex",
+      "languageNotes": "Uses openpyxl object copies and formula translation so expanded template rows retain workbook behavior and formatting."
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:render_xlsx",
+      "type": "function",
+      "name": "render_xlsx",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        25,
+        74
+      ],
+      "summary": "Loads an XLSX workbook, renders every worksheet with strict Jinja semantics, and serializes the result with stage-aware errors.",
+      "tags": [
+        "api-handler",
+        "service",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_render_worksheet",
+      "type": "function",
+      "name": "_render_worksheet",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        77,
+        89
+      ],
+      "summary": "Expands worksheet loop blocks in reverse order before rendering every remaining cell value.",
+      "tags": [
+        "utility",
+        "xlsx",
+        "templating"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_find_loop_blocks",
+      "type": "function",
+      "name": "_find_loop_blocks",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        92,
+        133
+      ],
+      "summary": "Discovers and validates balanced row-level Jinja loops encoded in worksheet cells.",
+      "tags": [
+        "utility",
+        "templating",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_single_text_cell_value",
+      "type": "function",
+      "name": "_single_text_cell_value",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        136,
+        142
+      ],
+      "summary": "Returns a stripped loop-marker string only when a cell contains an entire for or endfor tag.",
+      "tags": [
+        "utility",
+        "xlsx",
+        "templating"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_render_loop_block",
+      "type": "function",
+      "name": "_render_loop_block",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        145,
+        184
+      ],
+      "summary": "Replaces a loop-marker region with repeated, styled row templates rendered against per-item contexts.",
+      "tags": [
+        "utility",
+        "templating",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_capture_row",
+      "type": "function",
+      "name": "_capture_row",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        187,
+        188
+      ],
+      "summary": "Creates shallow copies of a worksheet row for later loop expansion.",
+      "tags": [
+        "utility",
+        "xlsx",
+        "templating"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_copy_cell",
+      "type": "function",
+      "name": "_copy_cell",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        191,
+        209
+      ],
+      "summary": "Copies styling, formatting, hyperlinks, and comments between openpyxl cells.",
+      "tags": [
+        "utility",
+        "xlsx",
+        "templating"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_render_cell_value",
+      "type": "function",
+      "name": "_render_cell_value",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        212,
+        238
+      ],
+      "summary": "Evaluates standalone Jinja expressions as typed values, renders inline templates, and translates formulas when rows are copied.",
+      "tags": [
+        "utility",
+        "xlsx",
+        "templating"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/stencil/xlsx.py:_evaluate_iterable",
+      "type": "function",
+      "name": "_evaluate_iterable",
+      "filePath": "src/stencil/xlsx.py",
+      "lineRange": [
+        241,
+        247
+      ],
+      "summary": "Evaluates a Jinja row-loop expression and rejects strings or non-sequence results.",
+      "tags": [
+        "utility",
+        "templating",
+        "validation"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "file:src/stencil/render.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "class:src/stencil/api.py:RenderMetrics",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "class:src/stencil/api.py:RenderMetrics",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:create_app",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:create_app",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_template_path_from_payload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_template_path_from_payload",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_output_format_from_payload",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_output_format_from_payload",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_media_type_for",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_media_type_for",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_http_exception",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/api.py",
+      "target": "function:src/stencil/api.py:_http_exception",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "file:src/stencil/render.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "function:src/stencil/cli.py:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "function:src/stencil/cli.py:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "function:src/stencil/cli.py:render_command",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/cli.py",
+      "target": "function:src/stencil/cli.py:render_command",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/docx.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/docx.py",
+      "target": "function:src/stencil/docx.py:render_docx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/docx.py",
+      "target": "function:src/stencil/docx.py:render_docx",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:StencilError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:StencilError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:UnsupportedFormatError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:UnsupportedFormatError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:RenderError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/errors.py",
+      "target": "class:src/stencil/errors.py:RenderError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:render_pptx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:render_pptx",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_read_slide_refs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_read_slide_refs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_build_render_plan",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_build_render_plan",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_find_slide_loop_blocks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_find_slide_loop_blocks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_slide_paragraph_texts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_slide_paragraph_texts",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_render_planned_slides",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_render_planned_slides",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_render_slide_xml",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_render_slide_xml",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_rewrite_presentation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_rewrite_presentation",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_clone_slide_part",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_clone_slide_part",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_max_slide_number",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_max_slide_number",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_is_slide_part",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_is_slide_part",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_next_relationship_id",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_next_relationship_id",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_slide_relationships_path",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_slide_relationships_path",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_presentation_target_to_part",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_presentation_target_to_part",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_part_to_presentation_target",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_part_to_presentation_target",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_evaluate_iterable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/pptx.py",
+      "target": "function:src/stencil/pptx.py:_evaluate_iterable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "file:src/stencil/docx.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "file:src/stencil/pdf.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "file:src/stencil/pptx.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "file:src/stencil/xlsx.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "function:src/stencil/render.py:render",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/render.py",
+      "target": "function:src/stencil/render.py:render",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "file:src/stencil/errors.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:render_xlsx",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:render_xlsx",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_worksheet",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_worksheet",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_find_loop_blocks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_find_loop_blocks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_single_text_cell_value",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_single_text_cell_value",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_loop_block",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_loop_block",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_capture_row",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_capture_row",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_copy_cell",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_copy_cell",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_cell_value",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_render_cell_value",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_evaluate_iterable",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1
+    },
+    {
+      "source": "file:src/stencil/xlsx.py",
+      "target": "function:src/stencil/xlsx.py:_evaluate_iterable",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/stencil/errors.py:UnsupportedFormatError",
+      "target": "class:src/stencil/errors.py:StencilError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:src/stencil/errors.py:RenderError",
+      "target": "class:src/stencil/errors.py:StencilError",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "function:src/stencil/api.py:create_app",
+      "target": "class:src/stencil/api.py:RenderMetrics",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/cli.py:render_command",
+      "target": "function:src/stencil/render.py:render",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/docx.py:render_docx",
+      "target": "class:src/stencil/errors.py:RenderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/pptx.py:render_pptx",
+      "target": "class:src/stencil/errors.py:RenderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/docx.py:render_docx",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/xlsx.py:render_xlsx",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/pptx.py:render_pptx",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/pdf.py:convert_docx_to_pdf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/pdf.py:convert_xlsx_to_pdf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/render.py:render",
+      "target": "function:src/stencil/pdf.py:convert_pptx_to_pdf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/stencil/xlsx.py:render_xlsx",
+      "target": "class:src/stencil/errors.py:RenderError",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

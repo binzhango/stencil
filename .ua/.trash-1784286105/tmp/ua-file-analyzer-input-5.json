@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/binzhang/vibe_coding_repo/stencil",
+  "batchFiles": [
+    {
+      "path": "examples/data/invoice.json",
+      "language": "json",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "examples/data/pptx-status.json",
+      "language": "json",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "examples/data/status-report.json",
+      "language": "json",
+      "sizeLines": 29,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "examples/data/invoice.json": [],
+    "examples/data/pptx-status.json": [],
+    "examples/data/status-report.json": []
+  }
+}

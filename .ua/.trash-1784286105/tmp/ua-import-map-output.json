@@ -1,0 +1,67 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 32,
+    "filesWithImports": 8,
+    "totalEdges": 17
+  },
+  "importMap": {
+    ".github/dependabot.yml": [],
+    ".github/workflows/publish.yml": [],
+    ".ua/.understandignore": [],
+    ".ua/config.json": [],
+    "CHANGELOG.md": [],
+    "examples/data/invoice.json": [],
+    "examples/data/pptx-status.json": [],
+    "examples/data/status-report.json": [],
+    "examples/README.md": [],
+    "examples/scripts/create_pptx_status_template.py": [],
+    "examples/scripts/create_styled_status_template.py": [],
+    "examples/scripts/render_styled_status_pdf.py": [],
+    "examples/templates/invoice.docx": [],
+    "examples/templates/pptx-status.pptx": [],
+    "examples/templates/styled-status-report.docx": [],
+    "guides/python-package-cicd-agent-guide.md": [],
+    "pyproject.toml": [],
+    "README.md": [],
+    "src/stencil/__init__.py": [
+      "src/stencil/_version.py",
+      "src/stencil/errors.py",
+      "src/stencil/pdf.py",
+      "src/stencil/render.py"
+    ],
+    "src/stencil/_version.py": [],
+    "src/stencil/api.py": [
+      "src/stencil/errors.py",
+      "src/stencil/render.py"
+    ],
+    "src/stencil/cli.py": [
+      "src/stencil/errors.py",
+      "src/stencil/render.py"
+    ],
+    "src/stencil/docx.py": [
+      "src/stencil/errors.py"
+    ],
+    "src/stencil/errors.py": [],
+    "src/stencil/pdf.py": [
+      "src/stencil/errors.py"
+    ],
+    "src/stencil/pptx.py": [
+      "src/stencil/errors.py"
+    ],
+    "src/stencil/py.typed": [],
+    "src/stencil/render.py": [
+      "src/stencil/docx.py",
+      "src/stencil/errors.py",
+      "src/stencil/pdf.py",
+      "src/stencil/pptx.py",
+      "src/stencil/xlsx.py"
+    ],
+    "src/stencil/xlsx.py": [
+      "src/stencil/errors.py"
+    ],
+    "tests/.gitkeep": [],
+    "tests/test_api.py": [],
+    "tests/test_render.py": []
+  }
+}

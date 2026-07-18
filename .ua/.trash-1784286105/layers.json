@@ -1,0 +1,83 @@
+[
+  {
+    "id": "layer:api",
+    "name": "Public Interfaces",
+    "description": "Package exports, the format-dispatch API, the Typer CLI, and the optional FastAPI adapter expose Stencil's rendering capabilities to callers.",
+    "nodeIds": [
+      "file:src/stencil/__init__.py",
+      "file:src/stencil/render.py",
+      "file:src/stencil/cli.py",
+      "file:src/stencil/api.py"
+    ]
+  },
+  {
+    "id": "layer:rendering-engine",
+    "name": "Rendering Engine",
+    "description": "Format-specific engines render DOCX, XLSX, and PPTX templates and convert rendered Office documents to PDF.",
+    "nodeIds": [
+      "file:src/stencil/docx.py",
+      "file:src/stencil/xlsx.py",
+      "file:src/stencil/pptx.py",
+      "file:src/stencil/pdf.py"
+    ]
+  },
+  {
+    "id": "layer:package-support",
+    "name": "Package Support",
+    "description": "Shared exception definitions, installed-version discovery, and PEP 561 typing metadata support the package's public and rendering modules.",
+    "nodeIds": [
+      "file:src/stencil/errors.py",
+      "file:src/stencil/_version.py",
+      "file:src/stencil/py.typed"
+    ]
+  },
+  {
+    "id": "layer:examples",
+    "name": "Examples and Fixtures",
+    "description": "Sample payloads, template fixtures, generator scripts, and walkthrough documentation demonstrate reproducible DOCX and PPTX rendering workflows.",
+    "nodeIds": [
+      "config:examples/data/invoice.json",
+      "config:examples/data/pptx-status.json",
+      "config:examples/data/status-report.json",
+      "document:examples/README.md",
+      "file:examples/scripts/create_pptx_status_template.py",
+      "file:examples/scripts/create_styled_status_template.py",
+      "file:examples/scripts/render_styled_status_pdf.py",
+      "file:examples/templates/invoice.docx",
+      "file:examples/templates/pptx-status.pptx",
+      "file:examples/templates/styled-status-report.docx"
+    ]
+  },
+  {
+    "id": "layer:test",
+    "name": "Test Layer",
+    "description": "Pytest integration coverage verifies the HTTP adapter and the full DOCX, XLSX, PPTX, and PDF rendering behavior.",
+    "nodeIds": [
+      "file:tests/.gitkeep",
+      "file:tests/test_api.py",
+      "file:tests/test_render.py"
+    ]
+  },
+  {
+    "id": "layer:project-support",
+    "name": "Project Configuration and Automation",
+    "description": "Packaging metadata, release automation, dependency updates, and Understand Anything settings govern how office-stencil is built, published, maintained, and analyzed.",
+    "nodeIds": [
+      "config:pyproject.toml",
+      "pipeline:.github/workflows/publish.yml",
+      "config:.github/dependabot.yml",
+      "file:.ua/.understandignore",
+      "config:.ua/config.json"
+    ]
+  },
+  {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "The project overview, release history, and Python package CI/CD guide explain usage, evolution, and maintenance practices.",
+    "nodeIds": [
+      "document:README.md",
+      "document:CHANGELOG.md",
+      "document:guides/python-package-cicd-agent-guide.md"
+    ]
+  }
+]

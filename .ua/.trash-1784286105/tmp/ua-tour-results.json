@@ -1,0 +1,555 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 5,
+      "name": "README.md",
+      "summary": "Comprehensive project guide describing the public Python API, CLI, optional HTTP service, DOCX/XLSX/PPTX authoring rules, examples, development workflow, dependencies, publishing process, and architectural constraints."
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "score": 2,
+      "name": "CHANGELOG.md",
+      "summary": "Chronicles Stencil releases from 0.1.0 through 0.5.0, covering the DOCX foundation, PDF conversion, XLSX and PPTX engines, publishing safeguards, and the optional FastAPI service."
+    },
+    {
+      "id": "file:src/stencil/api.py",
+      "score": 2,
+      "name": "api.py",
+      "summary": "Optional FastAPI service exposing health, metrics, and Office-template rendering endpoints for trusted internal callers, with bounded template-path resolution and in-process render telemetry."
+    },
+    {
+      "id": "file:tests/.gitkeep",
+      "score": 2,
+      "name": ".gitkeep",
+      "summary": "Keeps the tests directory tracked when no other test files are present in a minimal checkout."
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "score": 1,
+      "name": ".understandignore",
+      "summary": "Defines candidate exclusion patterns for Understand Anything codebase analysis, with grouped defaults and project-specific suggestions."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:src/stencil/errors.py",
+      "fanIn": 8,
+      "name": "errors.py"
+    },
+    {
+      "id": "file:tests/test_render.py",
+      "fanIn": 4,
+      "name": "test_render.py"
+    },
+    {
+      "id": "config:pyproject.toml",
+      "fanIn": 3,
+      "name": "pyproject.toml"
+    },
+    {
+      "id": "file:examples/templates/styled-status-report.docx",
+      "fanIn": 3,
+      "name": "styled-status-report.docx"
+    },
+    {
+      "id": "file:src/stencil/render.py",
+      "fanIn": 3,
+      "name": "render.py"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "fanIn": 2,
+      "name": "CHANGELOG.md"
+    },
+    {
+      "id": "file:examples/templates/pptx-status.pptx",
+      "fanIn": 2,
+      "name": "pptx-status.pptx"
+    },
+    {
+      "id": "file:src/stencil/pdf.py",
+      "fanIn": 2,
+      "name": "pdf.py"
+    },
+    {
+      "id": "config:.github/dependabot.yml",
+      "fanIn": 1,
+      "name": "dependabot.yml"
+    },
+    {
+      "id": "document:README.md",
+      "fanIn": 1,
+      "name": "README.md"
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "fanIn": 1,
+      "name": ".understandignore"
+    },
+    {
+      "id": "file:examples/scripts/create_pptx_status_template.py",
+      "fanIn": 1,
+      "name": "create_pptx_status_template.py"
+    },
+    {
+      "id": "file:examples/scripts/create_styled_status_template.py",
+      "fanIn": 1,
+      "name": "create_styled_status_template.py"
+    },
+    {
+      "id": "file:examples/scripts/render_styled_status_pdf.py",
+      "fanIn": 1,
+      "name": "render_styled_status_pdf.py"
+    },
+    {
+      "id": "file:examples/templates/invoice.docx",
+      "fanIn": 1,
+      "name": "invoice.docx"
+    },
+    {
+      "id": "file:src/stencil/__init__.py",
+      "fanIn": 1,
+      "name": "__init__.py"
+    },
+    {
+      "id": "file:src/stencil/_version.py",
+      "fanIn": 1,
+      "name": "_version.py"
+    },
+    {
+      "id": "file:src/stencil/docx.py",
+      "fanIn": 1,
+      "name": "docx.py"
+    },
+    {
+      "id": "file:src/stencil/pptx.py",
+      "fanIn": 1,
+      "name": "pptx.py"
+    },
+    {
+      "id": "file:src/stencil/xlsx.py",
+      "fanIn": 1,
+      "name": "xlsx.py"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "document:examples/README.md",
+      "fanOut": 6,
+      "name": "README.md"
+    },
+    {
+      "id": "file:src/stencil/render.py",
+      "fanOut": 5,
+      "name": "render.py"
+    },
+    {
+      "id": "pipeline:.github/workflows/publish.yml",
+      "fanOut": 5,
+      "name": "publish.yml"
+    },
+    {
+      "id": "file:src/stencil/__init__.py",
+      "fanOut": 4,
+      "name": "__init__.py"
+    },
+    {
+      "id": "document:README.md",
+      "fanOut": 2,
+      "name": "README.md"
+    },
+    {
+      "id": "file:src/stencil/api.py",
+      "fanOut": 2,
+      "name": "api.py"
+    },
+    {
+      "id": "file:src/stencil/cli.py",
+      "fanOut": 2,
+      "name": "cli.py"
+    },
+    {
+      "id": "config:.ua/config.json",
+      "fanOut": 1,
+      "name": "config.json"
+    },
+    {
+      "id": "config:pyproject.toml",
+      "fanOut": 1,
+      "name": "pyproject.toml"
+    },
+    {
+      "id": "document:CHANGELOG.md",
+      "fanOut": 1,
+      "name": "CHANGELOG.md"
+    },
+    {
+      "id": "document:guides/python-package-cicd-agent-guide.md",
+      "fanOut": 1,
+      "name": "python-package-cicd-agent-guide.md"
+    },
+    {
+      "id": "file:examples/scripts/create_pptx_status_template.py",
+      "fanOut": 1,
+      "name": "create_pptx_status_template.py"
+    },
+    {
+      "id": "file:examples/scripts/create_styled_status_template.py",
+      "fanOut": 1,
+      "name": "create_styled_status_template.py"
+    },
+    {
+      "id": "file:examples/scripts/render_styled_status_pdf.py",
+      "fanOut": 1,
+      "name": "render_styled_status_pdf.py"
+    },
+    {
+      "id": "file:examples/templates/invoice.docx",
+      "fanOut": 1,
+      "name": "invoice.docx"
+    },
+    {
+      "id": "file:examples/templates/pptx-status.pptx",
+      "fanOut": 1,
+      "name": "pptx-status.pptx"
+    },
+    {
+      "id": "file:examples/templates/styled-status-report.docx",
+      "fanOut": 1,
+      "name": "styled-status-report.docx"
+    },
+    {
+      "id": "file:src/stencil/docx.py",
+      "fanOut": 1,
+      "name": "docx.py"
+    },
+    {
+      "id": "file:src/stencil/pdf.py",
+      "fanOut": 1,
+      "name": "pdf.py"
+    },
+    {
+      "id": "file:src/stencil/pptx.py",
+      "fanOut": 1,
+      "name": "pptx.py"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:src/stencil/api.py",
+    "order": [
+      "file:src/stencil/api.py",
+      "file:src/stencil/errors.py",
+      "file:src/stencil/render.py",
+      "file:src/stencil/docx.py",
+      "file:src/stencil/pdf.py",
+      "file:src/stencil/pptx.py",
+      "file:src/stencil/xlsx.py"
+    ],
+    "depthMap": {
+      "file:src/stencil/api.py": 0,
+      "file:src/stencil/errors.py": 1,
+      "file:src/stencil/render.py": 1,
+      "file:src/stencil/docx.py": 2,
+      "file:src/stencil/pdf.py": 2,
+      "file:src/stencil/pptx.py": 2,
+      "file:src/stencil/xlsx.py": 2
+    },
+    "byDepth": {
+      "0": [
+        "file:src/stencil/api.py"
+      ],
+      "1": [
+        "file:src/stencil/errors.py",
+        "file:src/stencil/render.py"
+      ],
+      "2": [
+        "file:src/stencil/docx.py",
+        "file:src/stencil/pdf.py",
+        "file:src/stencil/pptx.py",
+        "file:src/stencil/xlsx.py"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:CHANGELOG.md",
+        "name": "CHANGELOG.md",
+        "type": "document",
+        "summary": "Chronicles Stencil releases from 0.1.0 through 0.5.0, covering the DOCX foundation, PDF conversion, XLSX and PPTX engines, publishing safeguards, and the optional FastAPI service."
+      },
+      {
+        "id": "document:README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Comprehensive project guide describing the public Python API, CLI, optional HTTP service, DOCX/XLSX/PPTX authoring rules, examples, development workflow, dependencies, publishing process, and architectural constraints."
+      },
+      {
+        "id": "document:examples/README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "Explains the bundled DOCX and PPTX templates, their JSON payloads, authoring rules, and CLI and Python rendering workflows."
+      },
+      {
+        "id": "document:guides/python-package-cicd-agent-guide.md",
+        "name": "python-package-cicd-agent-guide.md",
+        "type": "document",
+        "summary": "Detailed operational guide for Python package metadata, changelogs, pull-request CI, PyPI publishing, Dependabot, branch protection, releases, and failure recovery."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "pipeline:.github/workflows/publish.yml",
+        "name": "publish.yml",
+        "type": "pipeline",
+        "summary": "GitHub Actions release pipeline that validates the Python package, builds distributions, derives release notes from the changelog, creates or updates a GitHub release, and publishes artifacts to PyPI on pushes to main or manual dispatch."
+      }
+    ],
+    "data": [],
+    "config": [
+      {
+        "id": "config:pyproject.toml",
+        "name": "pyproject.toml",
+        "type": "config",
+        "summary": "Defines the office-stencil Python 3.12 package, its runtime and optional dependencies, the stencil CLI entry point, Hatchling build settings, and uv, Ruff, pytest, and strict mypy configuration."
+      },
+      {
+        "id": "config:examples/data/invoice.json",
+        "name": "invoice.json",
+        "type": "config",
+        "summary": "Provides a complete sample invoice payload for DOCX rendering, including invoice metadata, customer details, repeatable line items, and a formatted total."
+      },
+      {
+        "id": "config:examples/data/pptx-status.json",
+        "name": "pptx-status.json",
+        "type": "config",
+        "summary": "Supplies project metadata and milestone records used to demonstrate placeholder replacement and repeated-slide generation in a PPTX status deck."
+      },
+      {
+        "id": "config:examples/data/status-report.json",
+        "name": "status-report.json",
+        "type": "config",
+        "summary": "Defines the sample project status-report payload used by the styled DOCX example, with nested project and owner values, milestone rows, and an optional risk note."
+      },
+      {
+        "id": "config:.github/dependabot.yml",
+        "name": "dependabot.yml",
+        "type": "config",
+        "summary": "Configures weekly Dependabot updates for the project's uv and GitHub Actions dependencies, grouping Python production and development packages."
+      },
+      {
+        "id": "config:.ua/config.json",
+        "name": "config.json",
+        "type": "config",
+        "summary": "Stores Understand Anything project preferences, currently selecting English for generated knowledge-graph content."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 7,
+    "list": [
+      {
+        "id": "layer:api",
+        "name": "Public Interfaces",
+        "description": "Package exports, the format-dispatch API, the Typer CLI, and the optional FastAPI adapter expose Stencil's rendering capabilities to callers."
+      },
+      {
+        "id": "layer:rendering-engine",
+        "name": "Rendering Engine",
+        "description": "Format-specific engines render DOCX, XLSX, and PPTX templates and convert rendered Office documents to PDF."
+      },
+      {
+        "id": "layer:package-support",
+        "name": "Package Support",
+        "description": "Shared exception definitions, installed-version discovery, and PEP 561 typing metadata support the package's public and rendering modules."
+      },
+      {
+        "id": "layer:examples",
+        "name": "Examples and Fixtures",
+        "description": "Sample payloads, template fixtures, generator scripts, and walkthrough documentation demonstrate reproducible DOCX and PPTX rendering workflows."
+      },
+      {
+        "id": "layer:test",
+        "name": "Test Layer",
+        "description": "Pytest integration coverage verifies the HTTP adapter and the full DOCX, XLSX, PPTX, and PDF rendering behavior."
+      },
+      {
+        "id": "layer:project-support",
+        "name": "Project Configuration and Automation",
+        "description": "Packaging metadata, release automation, dependency updates, and Understand Anything settings govern how office-stencil is built, published, maintained, and analyzed."
+      },
+      {
+        "id": "layer:documentation",
+        "name": "Documentation",
+        "description": "The project overview, release history, and Python package CI/CD guide explain usage, evolution, and maintenance practices."
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "file:src/stencil/api.py": {
+      "name": "api.py",
+      "type": "file",
+      "summary": "Optional FastAPI service exposing health, metrics, and Office-template rendering endpoints for trusted internal callers, with bounded template-path resolution and in-process render telemetry."
+    },
+    "file:src/stencil/cli.py": {
+      "name": "cli.py",
+      "type": "file",
+      "summary": "Typer command-line interface that loads JSON render data, dispatches Office template rendering, and writes the resulting document with user-friendly errors."
+    },
+    "file:src/stencil/docx.py": {
+      "name": "docx.py",
+      "type": "file",
+      "summary": "DOCX renderer that validates a template path, delegates Jinja-compatible WordprocessingML rendering to docxtpl, and returns the serialized document bytes."
+    },
+    "file:src/stencil/errors.py": {
+      "name": "errors.py",
+      "type": "file",
+      "summary": "Defines the Stencil exception hierarchy, including unsupported-format errors and stage-aware render failures that retain template context."
+    },
+    "file:src/stencil/pptx.py": {
+      "name": "pptx.py",
+      "type": "file",
+      "summary": "PPTX rendering engine that edits Open Packaging Convention parts directly, expands slide-level Jinja loops, renders text across XML runs, and rebuilds presentation relationships and content types."
+    },
+    "file:src/stencil/render.py": {
+      "name": "render.py",
+      "type": "file",
+      "summary": "Public format dispatcher that validates template/output combinations, routes DOCX, XLSX, and PPTX work to their renderers, and optionally converts results to PDF."
+    },
+    "file:src/stencil/xlsx.py": {
+      "name": "xlsx.py",
+      "type": "file",
+      "summary": "XLSX rendering engine that evaluates Jinja expressions in cells, expands row-loop blocks while preserving formatting, and translates copied formulas before serialization."
+    },
+    "file:src/stencil/__init__.py": {
+      "name": "__init__.py",
+      "type": "file",
+      "summary": "Defines the Stencil package's public API by re-exporting rendering, PDF-conversion, error, and version symbols."
+    },
+    "file:src/stencil/_version.py": {
+      "name": "_version.py",
+      "type": "file",
+      "summary": "Resolves the installed office-stencil package version from importlib metadata and provides a development fallback when metadata is unavailable."
+    },
+    "file:src/stencil/pdf.py": {
+      "name": "pdf.py",
+      "type": "file",
+      "summary": "Provides a PDF conversion abstraction and a bounded LibreOffice subprocess implementation for rendered DOCX, XLSX, and PPTX bytes, including retries and detailed failure handling."
+    },
+    "pipeline:.github/workflows/publish.yml": {
+      "name": "publish.yml",
+      "type": "pipeline",
+      "summary": "GitHub Actions release pipeline that validates the Python package, builds distributions, derives release notes from the changelog, creates or updates a GitHub release, and publishes artifacts to PyPI on pushes to main or manual dispatch."
+    },
+    "document:CHANGELOG.md": {
+      "name": "CHANGELOG.md",
+      "type": "document",
+      "summary": "Chronicles Stencil releases from 0.1.0 through 0.5.0, covering the DOCX foundation, PDF conversion, XLSX and PPTX engines, publishing safeguards, and the optional FastAPI service."
+    },
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Comprehensive project guide describing the public Python API, CLI, optional HTTP service, DOCX/XLSX/PPTX authoring rules, examples, development workflow, dependencies, publishing process, and architectural constraints."
+    },
+    "config:pyproject.toml": {
+      "name": "pyproject.toml",
+      "type": "config",
+      "summary": "Defines the office-stencil Python 3.12 package, its runtime and optional dependencies, the stencil CLI entry point, Hatchling build settings, and uv, Ruff, pytest, and strict mypy configuration."
+    },
+    "config:examples/data/invoice.json": {
+      "name": "invoice.json",
+      "type": "config",
+      "summary": "Provides a complete sample invoice payload for DOCX rendering, including invoice metadata, customer details, repeatable line items, and a formatted total."
+    },
+    "config:examples/data/pptx-status.json": {
+      "name": "pptx-status.json",
+      "type": "config",
+      "summary": "Supplies project metadata and milestone records used to demonstrate placeholder replacement and repeated-slide generation in a PPTX status deck."
+    },
+    "config:examples/data/status-report.json": {
+      "name": "status-report.json",
+      "type": "config",
+      "summary": "Defines the sample project status-report payload used by the styled DOCX example, with nested project and owner values, milestone rows, and an optional risk note."
+    },
+    "config:.github/dependabot.yml": {
+      "name": "dependabot.yml",
+      "type": "config",
+      "summary": "Configures weekly Dependabot updates for the project's uv and GitHub Actions dependencies, grouping Python production and development packages."
+    },
+    "file:.ua/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "Defines candidate exclusion patterns for Understand Anything codebase analysis, with grouped defaults and project-specific suggestions."
+    },
+    "config:.ua/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "Stores Understand Anything project preferences, currently selecting English for generated knowledge-graph content."
+    },
+    "document:examples/README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "Explains the bundled DOCX and PPTX templates, their JSON payloads, authoring rules, and CLI and Python rendering workflows."
+    },
+    "file:examples/scripts/create_pptx_status_template.py": {
+      "name": "create_pptx_status_template.py",
+      "type": "file",
+      "summary": "Builds the styled PPTX status-deck fixture, including marker slides that demonstrate repeated-slide Jinja loops."
+    },
+    "file:examples/scripts/create_styled_status_template.py": {
+      "name": "create_styled_status_template.py",
+      "type": "file",
+      "summary": "Generates the styled DOCX status-report fixture with headers, tables, section rules, placeholders, and conditional risk content."
+    },
+    "file:examples/scripts/render_styled_status_pdf.py": {
+      "name": "render_styled_status_pdf.py",
+      "type": "file",
+      "summary": "Demonstrates the Python API by loading status data, rendering the styled DOCX template to PDF, and writing the result."
+    },
+    "file:examples/templates/invoice.docx": {
+      "name": "invoice.docx",
+      "type": "file",
+      "summary": "Provides the invoice DOCX fixture with Jinja variables, conditional notes, and a loop over line items."
+    },
+    "file:examples/templates/pptx-status.pptx": {
+      "name": "pptx-status.pptx",
+      "type": "file",
+      "summary": "Provides the PPTX status-deck fixture with project placeholders and marker slides for cloning milestone slides."
+    },
+    "file:examples/templates/styled-status-report.docx": {
+      "name": "styled-status-report.docx",
+      "type": "file",
+      "summary": "Provides a styled DOCX status-report fixture whose headers, tables, colors, and conditional content exercise formatting preservation."
+    },
+    "document:guides/python-package-cicd-agent-guide.md": {
+      "name": "python-package-cicd-agent-guide.md",
+      "type": "document",
+      "summary": "Detailed operational guide for Python package metadata, changelogs, pull-request CI, PyPI publishing, Dependabot, branch protection, releases, and failure recovery."
+    },
+    "file:src/stencil/py.typed": {
+      "name": "py.typed",
+      "type": "file",
+      "summary": "PEP 561 marker declaring that the distributed stencil package includes inline type information."
+    },
+    "file:tests/.gitkeep": {
+      "name": ".gitkeep",
+      "type": "file",
+      "summary": "Keeps the tests directory tracked when no other test files are present in a minimal checkout."
+    },
+    "file:tests/test_api.py": {
+      "name": "test_api.py",
+      "type": "file",
+      "summary": "Tests the optional FastAPI adapter's rendering response, metrics accounting, template-root confinement, and render-error reporting."
+    },
+    "file:tests/test_render.py": {
+      "name": "test_render.py",
+      "type": "file",
+      "summary": "Comprehensive integration suite for DOCX, XLSX, PPTX, and PDF rendering, including loops, style preservation, concurrency, and LibreOffice retry behavior."
+    }
+  },
+  "totalNodes": 32,
+  "totalEdges": 228
+}

@@ -1,0 +1,63 @@
+{
+  "nodes": [
+    {
+      "id": "document:CHANGELOG.md",
+      "type": "document",
+      "name": "CHANGELOG.md",
+      "filePath": "CHANGELOG.md",
+      "summary": "Chronicles Stencil releases from 0.1.0 through 0.5.0, covering the DOCX foundation, PDF conversion, XLSX and PPTX engines, publishing safeguards, and the optional FastAPI service.",
+      "tags": ["documentation", "release-history", "versioning", "publishing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "Comprehensive project guide describing the public Python API, CLI, optional HTTP service, DOCX/XLSX/PPTX authoring rules, examples, development workflow, dependencies, publishing process, and architectural constraints.",
+      "tags": ["documentation", "entry-point", "template-authoring", "development", "publishing"],
+      "complexity": "complex",
+      "languageNotes": "The guide combines executable Python, shell, and TOML examples with format-specific authoring and troubleshooting guidance."
+    },
+    {
+      "id": "config:pyproject.toml",
+      "type": "config",
+      "name": "pyproject.toml",
+      "filePath": "pyproject.toml",
+      "summary": "Defines the office-stencil Python 3.12 package, its runtime and optional dependencies, the stencil CLI entry point, Hatchling build settings, and uv, Ruff, pytest, and strict mypy configuration.",
+      "tags": ["configuration", "python-packaging", "build-system", "dependencies", "tooling"],
+      "complexity": "moderate",
+      "languageNotes": "Uses PEP 621 project metadata with dependency groups and Hatchling's src-layout wheel configuration."
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:CHANGELOG.md",
+      "target": "config:pyproject.toml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "config:pyproject.toml",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:CHANGELOG.md",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:pyproject.toml",
+      "target": "document:README.md",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

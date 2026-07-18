@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/Users/binzhang/vibe_coding_repo/stencil",
+  "batchFiles": [
+    {
+      "path": "CHANGELOG.md",
+      "language": "markdown",
+      "sizeLines": 56,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 318,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "pyproject.toml",
+      "language": "toml",
+      "sizeLines": 97,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "CHANGELOG.md": [],
+    "README.md": [],
+    "pyproject.toml": []
+  }
+}

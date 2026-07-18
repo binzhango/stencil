@@ -1,0 +1,14 @@
+{
+  "projectRoot": "/Users/binzhang/vibe_coding_repo/stencil",
+  "batchFiles": [
+    {
+      "path": ".github/workflows/publish.yml",
+      "language": "yaml",
+      "sizeLines": 96,
+      "fileCategory": "infra"
+    }
+  ],
+  "batchImportData": {
+    ".github/workflows/publish.yml": []
+  }
+}

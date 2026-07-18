@@ -1,0 +1,38 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'config:examples/data/invoice.json' has no edges (orphan)",
+    "Node 'config:examples/data/pptx-status.json' has no edges (orphan)",
+    "Node 'config:examples/data/status-report.json' has no edges (orphan)",
+    "Node 'file:src/stencil/py.typed' has no edges (orphan)",
+    "Node 'file:tests/.gitkeep' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 119,
+    "totalEdges": 228,
+    "totalLayers": 7,
+    "tourSteps": 11,
+    "nodeTypes": {
+      "file": 21,
+      "class": 7,
+      "function": 80,
+      "pipeline": 1,
+      "document": 4,
+      "config": 6
+    },
+    "edgeTypes": {
+      "imports": 17,
+      "contains": 87,
+      "exports": 87,
+      "inherits": 3,
+      "calls": 11,
+      "depends_on": 3,
+      "triggers": 2,
+      "deploys": 1,
+      "documents": 10,
+      "configures": 1,
+      "related": 3,
+      "tested_by": 3
+    }
+  }
+}

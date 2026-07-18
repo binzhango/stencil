@@ -1,0 +1,35 @@
+{
+  "projectRoot": "/Users/binzhang/vibe_coding_repo/stencil",
+  "batchFiles": [
+    {
+      "path": "src/stencil/__init__.py",
+      "language": "python",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/stencil/_version.py",
+      "language": "python",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/stencil/pdf.py",
+      "language": "python",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/stencil/__init__.py": [
+      "src/stencil/_version.py",
+      "src/stencil/errors.py",
+      "src/stencil/pdf.py",
+      "src/stencil/render.py"
+    ],
+    "src/stencil/_version.py": [],
+    "src/stencil/pdf.py": [
+      "src/stencil/errors.py"
+    ]
+  }
+}

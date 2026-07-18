@@ -1,0 +1,2203 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/stencil/api.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 191,
+      "nonEmptyLines": 158,
+      "functions": [
+        {
+          "name": "create_app",
+          "startLine": 60,
+          "endLine": 145,
+          "params": [
+            "template_root",
+            "renderer",
+            "metrics"
+          ]
+        },
+        {
+          "name": "_template_path_from_payload",
+          "startLine": 148,
+          "endLine": 163,
+          "params": [
+            "payload",
+            "template_root"
+          ]
+        },
+        {
+          "name": "_output_format_from_payload",
+          "startLine": 166,
+          "endLine": 172,
+          "params": [
+            "payload",
+            "template_path"
+          ]
+        },
+        {
+          "name": "_media_type_for",
+          "startLine": 175,
+          "endLine": 181,
+          "params": [
+            "output_format"
+          ]
+        },
+        {
+          "name": "_http_exception",
+          "startLine": 184,
+          "endLine": 191,
+          "params": [
+            "status_code",
+            "detail"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RenderMetrics",
+          "startLine": 21,
+          "endLine": 57,
+          "methods": [
+            "record_success",
+            "record_failure",
+            "snapshot"
+          ],
+          "properties": [
+            "renders_total",
+            "failures_total",
+            "render_seconds_total",
+            "renders_by_format",
+            "failures_by_stage",
+            "_lock"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RenderMetrics",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "create_app",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "_template_path_from_payload",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "_output_format_from_payload",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "_media_type_for",
+          "line": 175,
+          "isDefault": false
+        },
+        {
+          "name": "_http_exception",
+          "line": 184,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "snapshot",
+          "callee": "round",
+          "lineNumber": 53
+        },
+        {
+          "caller": "snapshot",
+          "callee": "round",
+          "lineNumber": 54
+        },
+        {
+          "caller": "snapshot",
+          "callee": "dict",
+          "lineNumber": 55
+        },
+        {
+          "caller": "snapshot",
+          "callee": "dict",
+          "lineNumber": 56
+        },
+        {
+          "caller": "create_app",
+          "callee": "RuntimeError",
+          "lineNumber": 76
+        },
+        {
+          "caller": "create_app",
+          "callee": "Path(template_root).expanduser().resolve",
+          "lineNumber": 81
+        },
+        {
+          "caller": "create_app",
+          "callee": "Path(template_root).expanduser",
+          "lineNumber": 81
+        },
+        {
+          "caller": "create_app",
+          "callee": "Path",
+          "lineNumber": 81
+        },
+        {
+          "caller": "create_app",
+          "callee": "RenderMetrics",
+          "lineNumber": 83
+        },
+        {
+          "caller": "create_app",
+          "callee": "FastAPI",
+          "lineNumber": 85
+        },
+        {
+          "caller": "metrics_endpoint",
+          "callee": "app_metrics.snapshot",
+          "lineNumber": 95
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "time.perf_counter",
+          "lineNumber": 98
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "_template_path_from_payload",
+          "lineNumber": 99
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "_output_format_from_payload",
+          "lineNumber": 100
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "payload.get",
+          "lineNumber": 101
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "isinstance",
+          "lineNumber": 102
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "HTTPException",
+          "lineNumber": 103
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "renderer",
+          "lineNumber": 106
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "time.perf_counter",
+          "lineNumber": 108
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "getattr",
+          "lineNumber": 109
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "app_metrics.record_failure",
+          "lineNumber": 110
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "logger.warning",
+          "lineNumber": 111
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "str",
+          "lineNumber": 114
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "HTTPException",
+          "lineNumber": 120
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "str",
+          "lineNumber": 120
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "time.perf_counter",
+          "lineNumber": 122
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "app_metrics.record_success",
+          "lineNumber": 123
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "logger.info",
+          "lineNumber": 124
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "str",
+          "lineNumber": 127
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "Response",
+          "lineNumber": 132
+        },
+        {
+          "caller": "render_endpoint",
+          "callee": "_media_type_for",
+          "lineNumber": 134
+        },
+        {
+          "caller": "create_app",
+          "callee": "app.add_api_route",
+          "lineNumber": 141
+        },
+        {
+          "caller": "create_app",
+          "callee": "app.add_api_route",
+          "lineNumber": 142
+        },
+        {
+          "caller": "create_app",
+          "callee": "app.add_api_route",
+          "lineNumber": 143
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "payload.get",
+          "lineNumber": 152
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "isinstance",
+          "lineNumber": 153
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "_http_exception",
+          "lineNumber": 154
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "Path(raw_template_path).expanduser",
+          "lineNumber": 156
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "Path",
+          "lineNumber": 156
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "(template_root / template_path).resolve",
+          "lineNumber": 160
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "resolved.is_relative_to",
+          "lineNumber": 161
+        },
+        {
+          "caller": "_template_path_from_payload",
+          "callee": "_http_exception",
+          "lineNumber": 162
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "payload.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "template_path.suffix.removeprefix(\".\").lower",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "template_path.suffix.removeprefix",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "isinstance",
+          "lineNumber": 170
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "_http_exception",
+          "lineNumber": 171
+        },
+        {
+          "caller": "_output_format_from_payload",
+          "callee": "raw_output_format.lower",
+          "lineNumber": 172
+        },
+        {
+          "caller": "_media_type_for",
+          "callee": "{\n        \"docx\": \"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\n        \"pptx\": \"application/vnd.openxmlformats-officedocument.presentationml.presentation\",\n        \"xlsx\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n        \"pdf\": \"application/pdf\",\n    }.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "_http_exception",
+          "callee": "RuntimeError",
+          "lineNumber": 188
+        },
+        {
+          "caller": "_http_exception",
+          "callee": "cast",
+          "lineNumber": 191
+        },
+        {
+          "caller": "_http_exception",
+          "callee": "HTTPException",
+          "lineNumber": 191
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/stencil/cli.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "main",
+          "startLine": 17,
+          "endLine": 18,
+          "params": []
+        },
+        {
+          "name": "render_command",
+          "startLine": 22,
+          "endLine": 57,
+          "params": [
+            "template",
+            "data",
+            "output",
+            "output_format"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "main",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "render_command",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "render_command",
+          "callee": "typer.Argument",
+          "lineNumber": 23
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.Argument",
+          "lineNumber": 24
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.Option",
+          "lineNumber": 27
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.Option",
+          "lineNumber": 31
+        },
+        {
+          "caller": "render_command",
+          "callee": "json.loads",
+          "lineNumber": 37
+        },
+        {
+          "caller": "render_command",
+          "callee": "data.read_text",
+          "lineNumber": 37
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.BadParameter",
+          "lineNumber": 39
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.BadParameter",
+          "lineNumber": 41
+        },
+        {
+          "caller": "render_command",
+          "callee": "isinstance",
+          "lineNumber": 43
+        },
+        {
+          "caller": "render_command",
+          "callee": "typer.BadParameter",
+          "lineNumber": 44
+        },
+        {
+          "caller": "render_command",
+          "callee": "output.suffix.removeprefix",
+          "lineNumber": 46
+        },
+        {
+          "caller": "render_command",
+          "callee": "render",
+          "lineNumber": 49
+        },
+        {
+          "caller": "render_command",
+          "callee": "click.ClickException",
+          "lineNumber": 51
+        },
+        {
+          "caller": "render_command",
+          "callee": "str",
+          "lineNumber": 51
+        },
+        {
+          "caller": "render_command",
+          "callee": "output.parent.mkdir",
+          "lineNumber": 54
+        },
+        {
+          "caller": "render_command",
+          "callee": "output.write_bytes",
+          "lineNumber": 55
+        },
+        {
+          "caller": "render_command",
+          "callee": "click.ClickException",
+          "lineNumber": 57
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/stencil/docx.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 43,
+      "functions": [
+        {
+          "name": "render_docx",
+          "startLine": 11,
+          "endLine": 55,
+          "params": [
+            "template_path",
+            "data"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "render_docx",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "render_docx",
+          "callee": "Path",
+          "lineNumber": 19
+        },
+        {
+          "caller": "render_docx",
+          "callee": "path.exists",
+          "lineNumber": 21
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 22
+        },
+        {
+          "caller": "render_docx",
+          "callee": "path.is_file",
+          "lineNumber": 23
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 24
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 29
+        },
+        {
+          "caller": "render_docx",
+          "callee": "DocxTemplate",
+          "lineNumber": 36
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "render_docx",
+          "callee": "document.render",
+          "lineNumber": 41
+        },
+        {
+          "caller": "render_docx",
+          "callee": "dict",
+          "lineNumber": 41
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 43
+        },
+        {
+          "caller": "render_docx",
+          "callee": "BytesIO",
+          "lineNumber": 47
+        },
+        {
+          "caller": "render_docx",
+          "callee": "document.save",
+          "lineNumber": 49
+        },
+        {
+          "caller": "render_docx",
+          "callee": "RenderError",
+          "lineNumber": 51
+        },
+        {
+          "caller": "render_docx",
+          "callee": "buffer.getvalue",
+          "lineNumber": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/stencil/errors.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 25,
+      "classes": [
+        {
+          "name": "StencilError",
+          "startLine": 6,
+          "endLine": 7,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "UnsupportedFormatError",
+          "startLine": 10,
+          "endLine": 11,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "RenderError",
+          "startLine": 14,
+          "endLine": 36,
+          "methods": [
+            "__init__"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "StencilError",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "UnsupportedFormatError",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "RenderError",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "__init__",
+          "callee": "Path",
+          "lineNumber": 24
+        },
+        {
+          "caller": "__init__",
+          "callee": "details.append",
+          "lineNumber": 29
+        },
+        {
+          "caller": "__init__",
+          "callee": "details.append",
+          "lineNumber": 31
+        },
+        {
+          "caller": "__init__",
+          "callee": "', '.join",
+          "lineNumber": 34
+        },
+        {
+          "caller": "__init__",
+          "callee": "super().__init__",
+          "lineNumber": 36
+        },
+        {
+          "caller": "__init__",
+          "callee": "super",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "src/stencil/pptx.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 378,
+      "nonEmptyLines": 310,
+      "functions": [
+        {
+          "name": "render_pptx",
+          "startLine": 40,
+          "endLine": 85,
+          "params": [
+            "template_path",
+            "data"
+          ]
+        },
+        {
+          "name": "_read_slide_refs",
+          "startLine": 88,
+          "endLine": 107,
+          "params": [
+            "package"
+          ]
+        },
+        {
+          "name": "_build_render_plan",
+          "startLine": 110,
+          "endLine": 151,
+          "params": [
+            "package",
+            "slide_refs",
+            "context",
+            "environment"
+          ]
+        },
+        {
+          "name": "_find_slide_loop_blocks",
+          "startLine": 154,
+          "endLine": 186,
+          "params": [
+            "package",
+            "slide_refs"
+          ]
+        },
+        {
+          "name": "_slide_paragraph_texts",
+          "startLine": 189,
+          "endLine": 199,
+          "params": [
+            "slide_xml"
+          ]
+        },
+        {
+          "name": "_render_planned_slides",
+          "startLine": 202,
+          "endLine": 212,
+          "params": [
+            "package",
+            "render_plan",
+            "environment"
+          ]
+        },
+        {
+          "name": "_render_slide_xml",
+          "startLine": 215,
+          "endLine": 236,
+          "params": [
+            "slide_xml",
+            "context",
+            "environment"
+          ]
+        },
+        {
+          "name": "_rewrite_presentation",
+          "startLine": 239,
+          "endLine": 326,
+          "params": [
+            "package",
+            "slide_refs",
+            "render_plan"
+          ]
+        },
+        {
+          "name": "_clone_slide_part",
+          "startLine": 329,
+          "endLine": 334,
+          "params": [
+            "package",
+            "source_path",
+            "target_path"
+          ]
+        },
+        {
+          "name": "_max_slide_number",
+          "startLine": 337,
+          "endLine": 343,
+          "params": [
+            "package"
+          ]
+        },
+        {
+          "name": "_is_slide_part",
+          "startLine": 346,
+          "endLine": 347,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "_next_relationship_id",
+          "startLine": 350,
+          "endLine": 354,
+          "params": [
+            "used_relationship_ids"
+          ]
+        },
+        {
+          "name": "_slide_relationships_path",
+          "startLine": 357,
+          "endLine": 359,
+          "params": [
+            "slide_path"
+          ]
+        },
+        {
+          "name": "_presentation_target_to_part",
+          "startLine": 362,
+          "endLine": 365,
+          "params": [
+            "target"
+          ]
+        },
+        {
+          "name": "_part_to_presentation_target",
+          "startLine": 368,
+          "endLine": 369,
+          "params": [
+            "part_name"
+          ]
+        },
+        {
+          "name": "_evaluate_iterable",
+          "startLine": 372,
+          "endLine": 378,
+          "params": [
+            "expression",
+            "context",
+            "environment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "render_pptx",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "_read_slide_refs",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "_build_render_plan",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "_find_slide_loop_blocks",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "_slide_paragraph_texts",
+          "line": 189,
+          "isDefault": false
+        },
+        {
+          "name": "_render_planned_slides",
+          "line": 202,
+          "isDefault": false
+        },
+        {
+          "name": "_render_slide_xml",
+          "line": 215,
+          "isDefault": false
+        },
+        {
+          "name": "_rewrite_presentation",
+          "line": 239,
+          "isDefault": false
+        },
+        {
+          "name": "_clone_slide_part",
+          "line": 329,
+          "isDefault": false
+        },
+        {
+          "name": "_max_slide_number",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "_is_slide_part",
+          "line": 346,
+          "isDefault": false
+        },
+        {
+          "name": "_next_relationship_id",
+          "line": 350,
+          "isDefault": false
+        },
+        {
+          "name": "_slide_relationships_path",
+          "line": 357,
+          "isDefault": false
+        },
+        {
+          "name": "_presentation_target_to_part",
+          "line": 362,
+          "isDefault": false
+        },
+        {
+          "name": "_part_to_presentation_target",
+          "line": 368,
+          "isDefault": false
+        },
+        {
+          "name": "_evaluate_iterable",
+          "line": 372,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "render_pptx",
+          "callee": "Path",
+          "lineNumber": 43
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "path.exists",
+          "lineNumber": 45
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 46
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "path.is_file",
+          "lineNumber": 47
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 48
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "Environment",
+          "lineNumber": 50
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "dict",
+          "lineNumber": 51
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "zipfile.ZipFile",
+          "lineNumber": 54
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "archive.read",
+          "lineNumber": 55
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "archive.namelist",
+          "lineNumber": 55
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 57
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "_read_slide_refs",
+          "lineNumber": 60
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "_build_render_plan",
+          "lineNumber": 61
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "_render_planned_slides",
+          "lineNumber": 62
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "_rewrite_presentation",
+          "lineNumber": 63
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 65
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 71
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "BytesIO",
+          "lineNumber": 75
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "zipfile.ZipFile",
+          "lineNumber": 77
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "package.items",
+          "lineNumber": 78
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "archive.writestr",
+          "lineNumber": 79
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "RenderError",
+          "lineNumber": 81
+        },
+        {
+          "caller": "render_pptx",
+          "callee": "buffer.getvalue",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 89
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 90
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "_presentation_target_to_part",
+          "lineNumber": 92
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "relationship.attrib.get",
+          "lineNumber": 94
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "presentation.findall",
+          "lineNumber": 98
+        },
+        {
+          "caller": "_read_slide_refs",
+          "callee": "refs.append",
+          "lineNumber": 100
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "_find_slide_loop_blocks",
+          "lineNumber": 116
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "range",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "_max_slide_number",
+          "lineNumber": 127
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "len",
+          "lineNumber": 130
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "_evaluate_iterable",
+          "lineNumber": 133
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "dict",
+          "lineNumber": 136
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "_clone_slide_part",
+          "lineNumber": 141
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "plan.append",
+          "lineNumber": 142
+        },
+        {
+          "caller": "_build_render_plan",
+          "callee": "plan.append",
+          "lineNumber": 148
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "enumerate",
+          "lineNumber": 161
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "_slide_paragraph_texts",
+          "lineNumber": 162
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "FOR_TAG_RE.match",
+          "lineNumber": 163
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "stack.append",
+          "lineNumber": 165
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "for_match.group",
+          "lineNumber": 168
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "for_match.group(\"expression\").strip",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "for_match.group",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "END_FOR_TAG_RE.match",
+          "lineNumber": 174
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 176
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "stack.pop",
+          "lineNumber": 177
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 179
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "blocks.append",
+          "lineNumber": 180
+        },
+        {
+          "caller": "_find_slide_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 184
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 190
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "root.iter",
+          "lineNumber": 192
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "paragraph.iter",
+          "lineNumber": 195
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "texts.append",
+          "lineNumber": 198
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "\"\".join(parts).strip",
+          "lineNumber": 198
+        },
+        {
+          "caller": "_slide_paragraph_texts",
+          "callee": "\"\".join",
+          "lineNumber": 198
+        },
+        {
+          "caller": "_render_planned_slides",
+          "callee": "_render_slide_xml",
+          "lineNumber": 208
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 221
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "root.iter",
+          "lineNumber": 222
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "list",
+          "lineNumber": 223
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "paragraph.iter",
+          "lineNumber": 223
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "\"\".join",
+          "lineNumber": 227
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "environment.from_string(template).render",
+          "lineNumber": 231
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "environment.from_string",
+          "lineNumber": 231
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "dict",
+          "lineNumber": 231
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "cast",
+          "lineNumber": 236
+        },
+        {
+          "caller": "_render_slide_xml",
+          "callee": "ElementTree.tostring",
+          "lineNumber": 236
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 244
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 245
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.fromstring",
+          "lineNumber": 246
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "presentation.find",
+          "lineNumber": 247
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ValueError",
+          "lineNumber": 249
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "list",
+          "lineNumber": 252
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "_is_slide_part",
+          "lineNumber": 253
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "_slide_relationships_path",
+          "lineNumber": 255
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "list",
+          "lineNumber": 259
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "slide_id_list.remove",
+          "lineNumber": 260
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "list",
+          "lineNumber": 262
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "relationship.attrib.get(\"Type\", \"\").endswith",
+          "lineNumber": 263
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "relationship.attrib.get",
+          "lineNumber": 263
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "rels.remove",
+          "lineNumber": 264
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "max",
+          "lineNumber": 266
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "int",
+          "lineNumber": 266
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "list",
+          "lineNumber": 270
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "content_types.findall",
+          "lineNumber": 270
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "override.attrib.get",
+          "lineNumber": 271
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "_is_slide_part",
+          "lineNumber": 272
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "part_name.removeprefix",
+          "lineNumber": 272
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "content_types.remove",
+          "lineNumber": 273
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "set",
+          "lineNumber": 274
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "used_relationship_ids.add",
+          "lineNumber": 281
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "str",
+          "lineNumber": 284
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "_next_relationship_id",
+          "lineNumber": 285
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "used_relationship_ids.add",
+          "lineNumber": 286
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.SubElement",
+          "lineNumber": 288
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "_part_to_presentation_target",
+          "lineNumber": 297
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.SubElement",
+          "lineNumber": 301
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.SubElement",
+          "lineNumber": 309
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "content_type_parts.add",
+          "lineNumber": 314
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.tostring",
+          "lineNumber": 316
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.register_namespace",
+          "lineNumber": 319
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.tostring",
+          "lineNumber": 320
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.register_namespace",
+          "lineNumber": 323
+        },
+        {
+          "caller": "_rewrite_presentation",
+          "callee": "ElementTree.tostring",
+          "lineNumber": 324
+        },
+        {
+          "caller": "_clone_slide_part",
+          "callee": "_slide_relationships_path",
+          "lineNumber": 332
+        },
+        {
+          "caller": "_clone_slide_part",
+          "callee": "_slide_relationships_path",
+          "lineNumber": 334
+        },
+        {
+          "caller": "_max_slide_number",
+          "callee": "int",
+          "lineNumber": 339
+        },
+        {
+          "caller": "_max_slide_number",
+          "callee": "match.group",
+          "lineNumber": 339
+        },
+        {
+          "caller": "_max_slide_number",
+          "callee": "SLIDE_NUMBER_RE.match",
+          "lineNumber": 341
+        },
+        {
+          "caller": "_max_slide_number",
+          "callee": "max",
+          "lineNumber": 343
+        },
+        {
+          "caller": "_is_slide_part",
+          "callee": "SLIDE_NUMBER_RE.match",
+          "lineNumber": 347
+        },
+        {
+          "caller": "_slide_relationships_path",
+          "callee": "posixpath.split",
+          "lineNumber": 358
+        },
+        {
+          "caller": "_presentation_target_to_part",
+          "callee": "target.startswith",
+          "lineNumber": 363
+        },
+        {
+          "caller": "_presentation_target_to_part",
+          "callee": "target.removeprefix",
+          "lineNumber": 364
+        },
+        {
+          "caller": "_presentation_target_to_part",
+          "callee": "posixpath.normpath",
+          "lineNumber": 365
+        },
+        {
+          "caller": "_presentation_target_to_part",
+          "callee": "posixpath.join",
+          "lineNumber": 365
+        },
+        {
+          "caller": "_part_to_presentation_target",
+          "callee": "posixpath.relpath",
+          "lineNumber": 369
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "environment.compile_expression",
+          "lineNumber": 375
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "isinstance",
+          "lineNumber": 376
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "isinstance",
+          "lineNumber": 376
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "ValueError",
+          "lineNumber": 377
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 16,
+        "functionCount": 16,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/stencil/render.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "render",
+          "startLine": 17,
+          "endLine": 71,
+          "params": [
+            "template_path",
+            "data",
+            "output_format"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "render",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "render",
+          "callee": "Path",
+          "lineNumber": 28
+        },
+        {
+          "caller": "render",
+          "callee": "path.suffix.lower",
+          "lineNumber": 29
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "render",
+          "callee": "(output_format or suffix.removeprefix(\".\")).lower",
+          "lineNumber": 37
+        },
+        {
+          "caller": "render",
+          "callee": "suffix.removeprefix",
+          "lineNumber": 37
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 39
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 46
+        },
+        {
+          "caller": "render",
+          "callee": "render_docx",
+          "lineNumber": 47
+        },
+        {
+          "caller": "render",
+          "callee": "convert_docx_to_pdf",
+          "lineNumber": 51
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 55
+        },
+        {
+          "caller": "render",
+          "callee": "render_xlsx",
+          "lineNumber": 56
+        },
+        {
+          "caller": "render",
+          "callee": "convert_xlsx_to_pdf",
+          "lineNumber": 60
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 64
+        },
+        {
+          "caller": "render",
+          "callee": "render_pptx",
+          "lineNumber": 65
+        },
+        {
+          "caller": "render",
+          "callee": "convert_pptx_to_pdf",
+          "lineNumber": 69
+        },
+        {
+          "caller": "render",
+          "callee": "UnsupportedFormatError",
+          "lineNumber": 71
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/stencil/xlsx.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 247,
+      "nonEmptyLines": 205,
+      "functions": [
+        {
+          "name": "render_xlsx",
+          "startLine": 25,
+          "endLine": 74,
+          "params": [
+            "template_path",
+            "data"
+          ]
+        },
+        {
+          "name": "_render_worksheet",
+          "startLine": 77,
+          "endLine": 89,
+          "params": [
+            "worksheet",
+            "context",
+            "environment"
+          ]
+        },
+        {
+          "name": "_find_loop_blocks",
+          "startLine": 92,
+          "endLine": 133,
+          "params": [
+            "worksheet"
+          ]
+        },
+        {
+          "name": "_single_text_cell_value",
+          "startLine": 136,
+          "endLine": 142,
+          "params": [
+            "cell"
+          ]
+        },
+        {
+          "name": "_render_loop_block",
+          "startLine": 145,
+          "endLine": 184,
+          "params": [
+            "worksheet",
+            "block",
+            "context",
+            "environment"
+          ]
+        },
+        {
+          "name": "_capture_row",
+          "startLine": 187,
+          "endLine": 188,
+          "params": [
+            "worksheet",
+            "row_index"
+          ]
+        },
+        {
+          "name": "_copy_cell",
+          "startLine": 191,
+          "endLine": 209,
+          "params": [
+            "source",
+            "target"
+          ]
+        },
+        {
+          "name": "_render_cell_value",
+          "startLine": 212,
+          "endLine": 238,
+          "params": [
+            "value",
+            "context",
+            "environment",
+            "formula_origin",
+            "formula_target"
+          ]
+        },
+        {
+          "name": "_evaluate_iterable",
+          "startLine": 241,
+          "endLine": 247,
+          "params": [
+            "expression",
+            "context",
+            "environment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "render_xlsx",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "_render_worksheet",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "_find_loop_blocks",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "_single_text_cell_value",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "_render_loop_block",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "_capture_row",
+          "line": 187,
+          "isDefault": false
+        },
+        {
+          "name": "_copy_cell",
+          "line": 191,
+          "isDefault": false
+        },
+        {
+          "name": "_render_cell_value",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "_evaluate_iterable",
+          "line": 241,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "render_xlsx",
+          "callee": "Path",
+          "lineNumber": 28
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "path.exists",
+          "lineNumber": 30
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 31
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "path.is_file",
+          "lineNumber": 32
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 38
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "load_workbook",
+          "lineNumber": 45
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 47
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "Environment",
+          "lineNumber": 49
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "dict",
+          "lineNumber": 50
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "_render_worksheet",
+          "lineNumber": 54
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 56
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 62
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "BytesIO",
+          "lineNumber": 66
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "workbook.save",
+          "lineNumber": 68
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "RenderError",
+          "lineNumber": 70
+        },
+        {
+          "caller": "render_xlsx",
+          "callee": "buffer.getvalue",
+          "lineNumber": 74
+        },
+        {
+          "caller": "_render_worksheet",
+          "callee": "reversed",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_render_worksheet",
+          "callee": "_find_loop_blocks",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_render_worksheet",
+          "callee": "_render_loop_block",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_render_worksheet",
+          "callee": "worksheet.iter_rows",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_render_worksheet",
+          "callee": "_render_cell_value",
+          "lineNumber": 83
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "range",
+          "lineNumber": 96
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "_single_text_cell_value",
+          "lineNumber": 99
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "FOR_TAG_RE.match",
+          "lineNumber": 103
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "stack.append",
+          "lineNumber": 105
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "for_match.group",
+          "lineNumber": 108
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "for_match.group(\"expression\").strip",
+          "lineNumber": 109
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "for_match.group",
+          "lineNumber": 109
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "END_FOR_TAG_RE.match",
+          "lineNumber": 114
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 116
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "stack.pop",
+          "lineNumber": 119
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 121
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "blocks.append",
+          "lineNumber": 125
+        },
+        {
+          "caller": "_find_loop_blocks",
+          "callee": "ValueError",
+          "lineNumber": 129
+        },
+        {
+          "caller": "_single_text_cell_value",
+          "callee": "isinstance",
+          "lineNumber": 138
+        },
+        {
+          "caller": "_single_text_cell_value",
+          "callee": "value.strip",
+          "lineNumber": 139
+        },
+        {
+          "caller": "_single_text_cell_value",
+          "callee": "FOR_TAG_RE.match",
+          "lineNumber": 140
+        },
+        {
+          "caller": "_single_text_cell_value",
+          "callee": "END_FOR_TAG_RE.match",
+          "lineNumber": 140
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "_capture_row",
+          "lineNumber": 153
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "range",
+          "lineNumber": 153
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "range",
+          "lineNumber": 157
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "_evaluate_iterable",
+          "lineNumber": 159
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "len",
+          "lineNumber": 160
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "len",
+          "lineNumber": 161
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "worksheet.delete_rows",
+          "lineNumber": 163
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "worksheet.insert_rows",
+          "lineNumber": 165
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "enumerate",
+          "lineNumber": 167
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "dict",
+          "lineNumber": 168
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "enumerate",
+          "lineNumber": 170
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "worksheet.cell",
+          "lineNumber": 176
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "_copy_cell",
+          "lineNumber": 177
+        },
+        {
+          "caller": "_render_loop_block",
+          "callee": "_render_cell_value",
+          "lineNumber": 178
+        },
+        {
+          "caller": "_capture_row",
+          "callee": "copy",
+          "lineNumber": 188
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 193
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 197
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 199
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 201
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 203
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 205
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 207
+        },
+        {
+          "caller": "_copy_cell",
+          "callee": "copy",
+          "lineNumber": 209
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "isinstance",
+          "lineNumber": 220
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "CELL_EXPRESSION_RE.match",
+          "lineNumber": 224
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "expression_match.group",
+          "lineNumber": 226
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "environment.compile_expression",
+          "lineNumber": 227
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "environment.from_string(value).render",
+          "lineNumber": 228
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "environment.from_string",
+          "lineNumber": 228
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "dict",
+          "lineNumber": 228
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "value.startswith",
+          "lineNumber": 230
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "Translator(value, origin=formula_origin).translate_formula",
+          "lineNumber": 234
+        },
+        {
+          "caller": "_render_cell_value",
+          "callee": "Translator",
+          "lineNumber": 234
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "environment.compile_expression",
+          "lineNumber": 244
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "isinstance",
+          "lineNumber": 245
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "isinstance",
+          "lineNumber": 245
+        },
+        {
+          "caller": "_evaluate_iterable",
+          "callee": "ValueError",
+          "lineNumber": 246
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    }
+  ]
+}
