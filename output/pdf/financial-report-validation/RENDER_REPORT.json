@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "stage": "complete",
+  "html": "/Users/binzhang/vibe_coding_repo/stencil/output/pdf/financial-report-validation/report.html",
+  "html_sha256": "20ec49b545c158c092cbea86477bb70ca95c33de6008d0029ded7d2f421e8a00",
+  "pdf": "/Users/binzhang/vibe_coding_repo/stencil/output/pdf/financial-report-validation/monthly-management-report.pdf",
+  "pdf_sha256": "1f4a1a9250bddf0499f66cd2f02384c7887375b3ebfbe2ba386231375688206b",
+  "pdf_bytes": 451891,
+  "attempts": [
+    {
+      "attempt": 1,
+      "layout": {
+        "sections": [
+          {
+            "name": "executive-summary",
+            "clientHeight": 952,
+            "scrollHeight": 952,
+            "clientWidth": 1280,
+            "scrollWidth": 1280,
+            "overflow": [],
+            "footerInsidePage": true
+          },
+          {
+            "name": "income-statement",
+            "clientHeight": 952,
+            "scrollHeight": 952,
+            "clientWidth": 1280,
+            "scrollWidth": 1280,
+            "overflow": [],
+            "footerInsidePage": true
+          },
+          {
+            "name": "balance-sheet",
+            "clientHeight": 952,
+            "scrollHeight": 952,
+            "clientWidth": 1280,
+            "scrollWidth": 1280,
+            "overflow": [],
+            "footerInsidePage": true
+          },
+          {
+            "name": "cash-flow",
+            "clientHeight": 952,
+            "scrollHeight": 952,
+            "clientWidth": 1280,
+            "scrollWidth": 1280,
+            "overflow": [],
+            "footerInsidePage": true
+          },
+          {
+            "name": "controls-and-provenance",
+            "clientHeight": 952,
+            "scrollHeight": 952,
+            "clientWidth": 1280,
+            "scrollWidth": 1280,
+            "overflow": [],
+            "footerInsidePage": true
+          }
+        ],
+        "brokenImages": [],
+        "failures": []
+      }
+    }
+  ]
+}
