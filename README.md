@@ -399,6 +399,11 @@ The release sequence is:
 The PyPI job runs only when Release Please creates a new release. Existing
 versions are not silently skipped; an attempted duplicate upload fails visibly.
 
+If artifact attachment or PyPI upload fails after the GitHub Release was already
+created, fix the workflow and run it manually from `main` with the existing tag
+in the `release_tag` input. This recovery path rebuilds, retests, and republishes
+that exact release without requiring Release Please to create another tag.
+
 One-time PyPI token setup:
 
 - Create or use the PyPI project named `office-stencil`.
