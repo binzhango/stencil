@@ -224,6 +224,10 @@ docs/
 # Rendered example outputs
 examples/out/
 
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
 # Local codebase analysis and reference submodel
 .ua/
 posterly/
