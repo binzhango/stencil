@@ -2,6 +2,14 @@
 
 All notable changes to Stencil are documented here.
 
+## [0.6.1](https://github.com/binzhango/stencil/compare/v0.6.0...v0.6.1) (2026-07-19)
+
+
+### Bug Fixes
+
+* **ci:** recover release artifact publishing ([d89fb8d](https://github.com/binzhango/stencil/commit/d89fb8df263a70f489235565118c01af149e94a8))
+* **ci:** recover release artifact publishing ([6beebf8](https://github.com/binzhango/stencil/commit/6beebf848a6171dad482d12def78c34e0de1999a))
+
 ## [0.6.0](https://github.com/binzhango/stencil/compare/v0.5.0...v0.6.0) (2026-07-19)
 
 
