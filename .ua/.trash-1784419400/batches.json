@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 32,
+  "totalBatches": 1,
+  "exportsByPath": {
+    ".ua/.understandignore": [],
+    "examples/scripts/create_pptx_status_template.py": [
+      "main",
+      "_remove_default_slide",
+      "_blank_slide",
+      "_add_title_slide",
+      "_add_marker_slide",
+      "_add_milestone_slide",
+      "_add_next_step_slide",
+      "_add_kicker",
+      "_add_rule",
+      "_add_status_pill",
+      "_add_text"
+    ],
+    "examples/scripts/create_styled_status_template.py": [
+      "shade_cell",
+      "set_cell_text",
+      "add_section_heading",
+      "main"
+    ],
+    "examples/scripts/render_styled_status_pdf.py": [
+      "main"
+    ],
+    "examples/templates/invoice.docx": [],
+    "examples/templates/pptx-status.pptx": [],
+    "examples/templates/styled-status-report.docx": [],
+    "src/stencil/__init__.py": [],
+    "src/stencil/_version.py": [],
+    "src/stencil/api.py": [
+      "RenderMetrics",
+      "create_app",
+      "_template_path_from_payload",
+      "_output_format_from_payload",
+      "_media_type_for",
+      "_http_exception"
+    ],
+    "src/stencil/cli.py": [
+      "main",
+      "render_command"
+    ],
+    "src/stencil/docx.py": [
+      "render_docx"
+    ],
+    "src/stencil/errors.py": [
+      "StencilError",
+      "UnsupportedFormatError",
+      "RenderError"
+    ],
+    "src/stencil/pdf.py": [
+      "ConversionWorker",
+      "PdfConversionError",
+      "LibreOfficePdfConverter",
+      "convert_docx_to_pdf",
+      "convert_xlsx_to_pdf",
+      "convert_pptx_to_pdf",
+      "_summarize_process_output"
+    ],
+    "src/stencil/pptx.py": [
+      "render_pptx",
+      "_read_slide_refs",
+      "_build_render_plan",
+      "_find_slide_loop_blocks",
+      "_slide_paragraph_texts",
+      "_render_planned_slides",
+      "_render_slide_xml",
+      "_rewrite_presentation",
+      "_clone_slide_part",
+      "_max_slide_number",
+      "_is_slide_part",
+      "_next_relationship_id",
+      "_slide_relationships_path",
+      "_presentation_target_to_part",
+      "_part_to_presentation_target",
+      "_evaluate_iterable"
+    ],
+    "src/stencil/py.typed": [],
+    "src/stencil/render.py": [
+      "render"
+    ],
+    "src/stencil/xlsx.py": [
+      "render_xlsx",
+      "_render_worksheet",
+      "_find_loop_blocks",
+      "_single_text_cell_value",
+      "_render_loop_block",
+      "_capture_row",
+      "_copy_cell",
+      "_render_cell_value",
+      "_evaluate_iterable"
+    ],
+    "tests/.gitkeep": [],
+    "tests/test_api.py": [
+      "_test_client",
+      "test_api_renders_document_and_records_metrics",
+      "test_api_constrains_templates_to_configured_root",
+      "test_api_records_render_failures"
+    ],
+    "tests/test_render.py": [
+      "_rendered_docx_text",
+      "_load_rendered_workbook",
+      "_write_minimal_pptx",
+      "_rendered_pptx_slide_texts",
+      "test_render_rejects_unsupported_template_suffix",
+      "test_render_rejects_unsupported_output_format",
+      "test_xlsx_simple_substitutions_preserve_types_and_styles",
+      "test_xlsx_row_loop_clones_rows_and_translates_formulas",
+      "test_pptx_simple_substitutions_preserve_slide_order",
+      "test_pptx_slide_loop_clones_slides_and_rewrites_relationships",
+      "test_render_converts_pptx_to_pdf",
+      "test_render_converts_xlsx_to_pdf",
+      "test_render_rejects_missing_docx_template",
+      "test_invoice_example_matches_expected_output_text",
+      "test_styled_status_report_example_matches_expected_output_text",
+      "test_pptx_status_example_matches_expected_output_text",
+      "test_render_converts_docx_to_pdf",
+      "test_render_pdf_dispatch_is_safe_for_concurrent_calls",
+      "test_libreoffice_converter_writes_pdf_and_cleans_temp_workspace",
+      "test_libreoffice_converter_retries_transient_failure",
+      "test_libreoffice_converter_retries_after_timeout",
+      "test_libreoffice_converter_reports_missing_executable"
+    ]
+  },
+  "batches": [
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": ".ua/.understandignore",
+          "language": "unknown",
+          "sizeLines": 140,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".ua/config.json",
+          "language": "json",
+          "sizeLines": 3,
+          "fileCategory": "config"
+        },
+        {
+          "path": "guides/python-package-cicd-agent-guide.md",
+          "language": "markdown",
+          "sizeLines": 399,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".ua/.understandignore": [],
+        ".ua/config.json": [],
+        "guides/python-package-cicd-agent-guide.md": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

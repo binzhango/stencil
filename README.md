@@ -27,11 +27,13 @@ What exists now:
 - template authoring guidance for supported DOCX, PPTX, and XLSX features
 - XLSX cell substitutions and row loops
 - versioned sample templates covered by expected-output tests
+- optional validated financial-report skill with HTML and Chromium PDF output
 - DOCX-first roadmap in local ignored docs
 
 What does not exist yet:
 
 - distributed queues, untrusted template sandboxing, or hosted multi-tenant operations
+- a general-purpose CSV/DataFrame-to-financial-contract adapter; tabular finance data must first be mapped to the documented canonical JSON contract
 
 ## Naming
 
@@ -80,6 +82,105 @@ stencil render workbook.xlsx data.json --output workbook.pdf
 The CLI reads a top-level JSON object from the data file and writes the rendered document bytes to the output path.
 
 PDF output requires LibreOffice to be installed and available as `soffice` or `libreoffice`.
+
+## Financial Report Skill
+
+The repository includes an optional
+[`financial-report-generator`](.agents/skills/financial-report-generator/SKILL.md) skill for
+validated monthly management reports. It is separate from the Office-template
+`stencil render` command: it renders a self-contained HTML report with Jinja2 and
+converts that HTML to a print-ready PDF with Playwright Chromium.
+
+The report contains five fixed sections:
+
+- executive summary, KPIs, charts, and sourced commentary
+- income statement
+- balance sheet
+- cash-flow statement
+- controls, warnings, source inventory, and reproducibility hashes
+
+Install the optional PDF runtime once:
+
+```bash
+uv sync --extra reports --dev
+uv run playwright install chromium
+```
+
+Poppler commands `pdfinfo` and `pdftotext` must also be available for final PDF
+geometry and physical-page content verification.
+
+### Generate a report from canonical JSON
+
+The builder accepts the canonical contract documented in
+[`data-contract.md`](.agents/skills/financial-report-generator/references/data-contract.md).
+Start with the bundled example:
+
+```bash
+uv run python .agents/skills/financial-report-generator/scripts/build_report.py \
+  .agents/skills/financial-report-generator/assets/example-input.json \
+  --out-dir report-output
+
+uv run python .agents/skills/financial-report-generator/scripts/render_report.py \
+  report-output/report.html \
+  --output report-output/report.pdf
+
+uv run python .agents/skills/financial-report-generator/scripts/verify_output.py \
+  report-output/report.html \
+  --pdf report-output/report.pdf \
+  --render-diagnostics report-output/RENDER_REPORT.json \
+  --output report-output/VERIFY_REPORT.json
+```
+
+Treat any failed gate as a release blocker. Review every warning and visually
+inspect all PDF pages before distributing the report.
+
+The output package contains:
+
+- `report.html`: self-contained report source
+- `report.pdf`: final Chromium-rendered report
+- `GATE_REPORT.json`: financial validation results and warnings
+- `DATA_MANIFEST.json`: input, template, and generation metadata
+- `RENDER_REPORT.json`: browser attempts and layout diagnostics
+- `VERIFY_REPORT.json`: HTML and physical-PDF verification results
+
+### Use CSV or DataFrame input
+
+CSV, Excel, pandas, and Polars DataFrames are not injected directly into the
+Jinja template. First normalize their rows into the canonical JSON contract; the
+builder then validates and derives the financial values before constructing the
+template view model.
+
+For a straightforward monthly export, a useful intermediate table is:
+
+```csv
+section,field,current,prior
+income,revenue,12850,11960
+income,cost_of_revenue,7710,7415
+balance,cash,4680,4210
+cash_flow,operating_cash_flow,1180,920
+cash_flow,investing_cash_flow,-430,-355
+```
+
+When asking an agent to generate a report from a financial CSV, use a request
+similar to:
+
+> Read `monthly-financials.csv`, inspect its columns and sign conventions, map
+> it to the financial report canonical contract, preserve decimal values as
+> strings, record the source file and hash, run every build/render/verification
+> gate, visually inspect all five pages, and deliver the complete report package.
+
+The normalization step must:
+
+- map every source column or row to an allowed canonical section and field
+- preserve monetary values as decimal strings rather than binary floats
+- reject duplicate fields, blanks, NaN, and missing required values
+- never replace missing financial values with zero
+- make currency, scale, periods, and cash-flow signs explicit
+- retain the original source and record its stable identifier and SHA-256 hash
+
+This boundary keeps arbitrary spreadsheet layouts out of the presentation
+template and makes the report reproducible. A reusable automatic DataFrame
+normalizer is planned but is not currently part of the package.
 
 ## Optional Service
 
@@ -225,6 +326,10 @@ Optional worker dependencies:
 - `celery`: larger distributed worker option
 - `redis`: queue/backend client
 
+Optional financial report dependencies:
+
+- `playwright`: deterministic HTML-to-PDF rendering with Chromium
+
 Development dependencies:
 
 - `pytest`: test runner
@@ -235,6 +340,8 @@ Development dependencies:
 External system dependency for PDF output:
 
 - LibreOffice / `soffice`: converts rendered Office documents to PDF
+- Playwright Chromium: renders the optional financial report HTML to PDF
+- Poppler / `pdfinfo` / `pdftotext`: verifies financial report page geometry and content
 
 ## Local Development
 

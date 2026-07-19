@@ -1,0 +1,81 @@
+{
+  "overall": "PASS",
+  "html": {
+    "path": "output/pdf/financial-report-validation/report.html",
+    "sha256": "20ec49b545c158c092cbea86477bb70ca95c33de6008d0029ded7d2f421e8a00"
+  },
+  "pdf": "output/pdf/financial-report-validation/monthly-management-report.pdf",
+  "gates": [
+    {
+      "name": "html-exists",
+      "status": "PASS",
+      "detail": "output/pdf/financial-report-validation/report.html"
+    },
+    {
+      "name": "template-complete",
+      "status": "PASS",
+      "detail": "no unresolved Jinja syntax"
+    },
+    {
+      "name": "required-sections",
+      "status": "PASS",
+      "detail": "all five sections present once and in order"
+    },
+    {
+      "name": "offline-resources",
+      "status": "PASS",
+      "detail": "no remote resources"
+    },
+    {
+      "name": "print-css",
+      "status": "PASS",
+      "detail": "paged-media rules present"
+    },
+    {
+      "name": "html-page-contract",
+      "status": "PASS",
+      "detail": "page_size=Letter; expected_pages=5"
+    },
+    {
+      "name": "pdf-exists",
+      "status": "PASS",
+      "detail": "output/pdf/financial-report-validation/monthly-management-report.pdf (451891 bytes)",
+      "sha256": "1f4a1a9250bddf0499f66cd2f02384c7887375b3ebfbe2ba386231375688206b"
+    },
+    {
+      "name": "pdf-metadata",
+      "status": "PASS",
+      "detail": "page metadata read with pdfinfo",
+      "metadata": {
+        "pages": 5,
+        "width_points": 612.0,
+        "height_points": 792.0
+      }
+    },
+    {
+      "name": "pdf-page-count",
+      "status": "PASS",
+      "detail": "pages=5; expected=5"
+    },
+    {
+      "name": "pdf-page-size",
+      "status": "PASS",
+      "detail": "actual=612.0x792.0pt; expected=612.0x792.0pt"
+    },
+    {
+      "name": "pdf-text-extraction",
+      "status": "PASS",
+      "detail": "extracted text from 5 page(s)"
+    },
+    {
+      "name": "pdf-page-content",
+      "status": "PASS",
+      "detail": "required heading and footer found on every physical page"
+    },
+    {
+      "name": "render-diagnostics",
+      "status": "PASS",
+      "detail": "output/pdf/financial-report-validation/RENDER_REPORT.json: PASS"
+    }
+  ]
+}
