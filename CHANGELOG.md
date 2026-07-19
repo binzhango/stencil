@@ -2,6 +2,23 @@
 
 All notable changes to Stencil are documented here.
 
+## [0.6.0](https://github.com/binzhango/stencil/compare/v0.5.0...v0.6.0) (2026-07-19)
+
+
+### Features
+
+* **ci:** automate versioned package releases ([4dc1a50](https://github.com/binzhango/stencil/commit/4dc1a50ca80fc3183417f3a2a99ca308b4d92b2a))
+* **ci:** automate versioned package releases ([678a67e](https://github.com/binzhango/stencil/commit/678a67e01e0f7fbb9ab33eaf0920825d0d206212))
+
+
+### Dependencies
+
+* **deps-dev:** bump httpx2 from 2.5.0 to 2.7.0 ([9fd476b](https://github.com/binzhango/stencil/commit/9fd476b78ec3f1c9dadb3a7018b81ea473231984))
+* **deps-dev:** bump mypy from 2.1.0 to 2.3.0 ([35a2f1e](https://github.com/binzhango/stencil/commit/35a2f1e2308b29a888da5b4e1c4cd26135053cd3))
+* **deps-dev:** bump ruff from 0.15.20 to 0.15.22 ([1378a84](https://github.com/binzhango/stencil/commit/1378a8463ef660e3b75ccd34bc0be434403edc26))
+* **deps:** bump fastapi from 0.138.1 to 0.139.2 ([fe96011](https://github.com/binzhango/stencil/commit/fe9601132e73f01b51407f783764ba58cc998d86))
+* **deps:** bump typer from 0.26.8 to 0.27.0 ([f74a2f0](https://github.com/binzhango/stencil/commit/f74a2f0cdfc6aba52bc81cdb83598d053893eb97))
+
 ## 0.5.0 - 2026-06-27
 
 ### Added
