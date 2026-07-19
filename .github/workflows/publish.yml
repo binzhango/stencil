@@ -1,21 +1,21 @@
-name: Publish to PyPI
+name: Release and publish
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
 
 permissions:
   contents: read
 
 jobs:
-  publish:
-    name: Test, build, release, and publish
+  quality:
+    name: Test, lint, and build
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
 
     steps:
       - name: Check out repository
@@ -41,56 +41,60 @@ jobs:
       - name: Build package
         run: uv build
 
-      - name: Read package version
-        id: version
-        run: |
-          VERSION=$(uv run python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=v${VERSION}" >> "$GITHUB_OUTPUT"
+      - name: Store release distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-distributions
+          path: dist/
+          if-no-files-found: error
 
-      - name: Read changelog entry
-        run: |
-          uv run python - <<'PY'
-          import os
-          import pathlib
-          import re
-          import tomllib
+  release:
+    name: Prepare or create release
+    needs: quality
+    runs-on: ubuntu-latest
 
-          version = tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]["version"]
-          changelog = pathlib.Path("CHANGELOG.md").read_text()
-          pattern = rf"^## {re.escape(version)}(?:\s+-\s+[^\n]*)?\n(?P<body>.*?)(?=^## \d|\Z)"
-          match = re.search(pattern, changelog, flags=re.MULTILINE | re.DOTALL)
-          if match is None:
-              raise SystemExit(f"CHANGELOG.md is missing a section for version {version}")
+    permissions:
+      contents: write
+      pull-requests: write
 
-          body = match.group("body").strip()
-          if not body:
-              raise SystemExit(f"CHANGELOG.md section for version {version} is empty")
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
 
-          path = pathlib.Path(os.environ["RUNNER_TEMP"]) / "release-notes.md"
-          path.write_text(body + "\n")
-          print(path)
-          PY
+    steps:
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@v5
+        with:
+          release-type: python
+          target-branch: main
 
-      - name: Create GitHub release
+  publish:
+    name: Publish release artifacts
+    needs:
+      - quality
+      - release
+    if: ${{ needs.release.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download release distributions
+        uses: actions/download-artifact@v5
+        with:
+          name: release-distributions
+          path: dist/
+
+      - name: Attach distributions to GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          if gh release view "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
-            gh release edit "${{ steps.version.outputs.tag }}" \
-              --title "Stencil ${{ steps.version.outputs.tag }}" \
-              --notes-file "$RUNNER_TEMP/release-notes.md"
-            gh release upload "${{ steps.version.outputs.tag }}" dist/* --clobber
-          else
-            gh release create "${{ steps.version.outputs.tag }}" \
-              dist/* \
-              --title "Stencil ${{ steps.version.outputs.tag }}" \
-              --notes-file "$RUNNER_TEMP/release-notes.md"
-          fi
+          RELEASE_TAG: ${{ needs.release.outputs.tag_name }}
+        run: gh release upload "$RELEASE_TAG" dist/* --clobber
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
-          skip-existing: true

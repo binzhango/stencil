@@ -373,21 +373,31 @@ uv run mypy
 
 ## Publishing
 
-The repo includes a GitHub Actions workflow at `.github/workflows/publish.yml`.
+The repo uses Release Please and the GitHub Actions workflow at
+`.github/workflows/publish.yml`. A push to `main` runs tests, linting, and the
+package build before any release action. Release Please then opens or updates a
+release pull request containing the next version and generated changelog entry.
 
-It publishes to PyPI when changes land on `main`:
+Use Conventional Commit prefixes in pull-request squash commit titles:
 
-1. Check out the repo.
-2. Install `uv`.
-3. Set up Python 3.12.
-4. Install dependencies with `uv sync --dev`.
-5. Run tests with `uv run pytest`.
-6. Run linting with `uv run ruff check .`.
-7. Build the package with `uv build`.
-8. Read the matching release notes from `CHANGELOG.md`.
-9. Create a GitHub Release tagged from the package version, such as `v0.1.0`.
-10. Attach the built wheel and source distribution to the release.
-11. Publish with the `PYPI_API_TOKEN` GitHub Actions secret.
+- `fix:` creates a patch release, such as `0.6.0` to `0.6.1`
+- `feat:` creates a minor release, such as `0.6.0` to `0.7.0`
+- `feat!:` or a `BREAKING CHANGE:` footer creates a major release
+- `chore:` and most documentation-only changes do not create releases
+
+The release sequence is:
+
+1. Merge feature and fix pull requests into `main` using Conventional Commit titles.
+2. The workflow tests, lints, and builds the package.
+3. Release Please opens or refreshes the release pull request.
+4. Review and merge that release pull request.
+5. The workflow repeats its quality gates against the versioned release commit.
+6. Release Please creates the version tag and GitHub Release.
+7. The workflow attaches the wheel and source distribution to the release.
+8. The workflow publishes the same distributions to PyPI.
+
+The PyPI job runs only when Release Please creates a new release. Existing
+versions are not silently skipped; an attempted duplicate upload fails visibly.
 
 One-time PyPI token setup:
 
@@ -396,7 +406,15 @@ One-time PyPI token setup:
 - Add the token to GitHub as an Actions secret named `PYPI_API_TOKEN`.
 - The publish workflow uses `user: __token__` and `password: ${{ secrets.PYPI_API_TOKEN }}`.
 
-PyPI and GitHub releases both require every upload to have a new version. Before merging a feature branch into `main`, update the `version` in `pyproject.toml` and add a matching section to `CHANGELOG.md`. The runtime `stencil.__version__` is read from installed package metadata, so there is no second version constant to keep in sync. The workflow creates the GitHub tag from that version and uses the matching changelog section as the release notes.
+In repository settings, GitHub Actions must have permission to create pull
+requests. The workflow grants its token `contents: write` and
+`pull-requests: write` only to the Release Please job.
+
+Release Please updates `pyproject.toml` and `CHANGELOG.md`; contributors should
+not manually bump routine release versions. To force a specific version, put a
+`Release-As: x.y.z` footer in a releasable Conventional Commit. The runtime
+`stencil.__version__` continues to come from installed package metadata, so there
+is no second version constant to maintain.
 
 ## Dependabot
 
